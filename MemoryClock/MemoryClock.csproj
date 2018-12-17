@@ -128,6 +128,7 @@
     <Compile Include="Controls\BrightnessOverlayControl.xaml.cs">
       <DependentUpon>BrightnessOverlayControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RadioToggle.cs" />
     <Compile Include="Converters\BurninMarginConverter.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Converters\NoPhoneConverter.cs" />
@@ -143,6 +144,9 @@
     <Compile Include="Common\RollingAverage.cs" />
     <Compile Include="Sensors\TimeController.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Settings\SettingsControl.xaml.cs">
+      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -173,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Settings\SettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -182,9 +190,7 @@
       <Version>12.0.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
