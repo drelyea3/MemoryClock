@@ -5,10 +5,57 @@
     xmlns:local="using:MemoryClock"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:MemoryClock.Controls"
+    xmlns:sensors="using:MemoryClock.Sensors"
+    xmlns:converters="using:MemoryClock.Converters"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Foreground="YellowGreen">
+
+    <Page.Resources>
+        <sensors:BrightnessController x:Key="brightnessController"/>
+        <sensors:TimeController x:Key="timeController"/>
+        <converters:DateTimeConverter x:Key="dateTime"/>
+        <converters:BurninMarginConverter x:Key="burnin"/>
+    </Page.Resources>
 
     <Grid>
+        <Grid Margin="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource burnin}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <Viewbox Stretch="Uniform" Margin="16,0">
+                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='dddd'}"/>
+            </Viewbox>
+
+            <Viewbox Stretch="Uniform" Grid.Row="1" Margin="-64">
+                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='t'}"/>
+            </Viewbox>
+
+            <Viewbox Stretch="Uniform" Grid.Row="2">
+                <TextBlock Text="Nighttime!"/>
+                <!--<TextBlock Text="{Binding Converter={StaticResource timeOfDay}}"/>-->
+            </Viewbox>
+
+            <Viewbox Stretch="Uniform" Grid.Row="2"  HorizontalAlignment="Left" Margin="16,0">
+                <StackPanel Orientation="Horizontal">
+                    <Grid><!--Visibility="{Binding Converter={StaticResource noPhone}}">-->
+                            <SymbolIcon Symbol="Phone"/>
+                            <SymbolIcon Symbol="Clear" Foreground="Red"/>
+                        </Grid>
+                </StackPanel>
+            </Viewbox>
+
+            <Viewbox Stretch="Uniform" Grid.Row="3" Margin="16,0">
+                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='MMMM d, yyyy'}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+            </Viewbox>
+
+        </Grid>
+
+        <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource brightnessController}, Path=Brightness}"/>
     </Grid>
 </Page>
