@@ -29,6 +29,22 @@ namespace MemoryClock.Sensors
             set { SetValue(NowProperty, value); }
         }
 
+        public bool IsPaused
+        {
+            get { return timer.IsEnabled; }
+            set
+            {
+                if (value)
+                {
+                    timer.Stop();
+                }
+                else
+                {
+                    timer.Start();
+                }
+            }
+        }
+
         public event EventHandler<TickEventArgs> Tick;
 
         public static readonly DependencyProperty NowProperty =
@@ -41,12 +57,17 @@ namespace MemoryClock.Sensors
             timer.Tick += OnTick;
         }
 
+        public void Update(DateTime now)
+        {
+            Now = now;
+            Tick?.Invoke(this, eventArgs.Set(Now));
+        }
+
         private void OnTick(object sender, object e)
         {
             Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => 
             {
-                Now = DateTime.Now;
-                Tick?.Invoke(this, eventArgs.Set(Now));
+                Update(DateTime.Now);
             });
         }
     }

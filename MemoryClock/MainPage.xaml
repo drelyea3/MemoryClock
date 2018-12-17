@@ -8,9 +8,11 @@
     xmlns:controls="using:MemoryClock.Controls"
     xmlns:sensors="using:MemoryClock.Sensors"
     xmlns:converters="using:MemoryClock.Converters"
+    xmlns:common="using:Common"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Foreground="YellowGreen">
+    Foreground="{ThemeResource appForegroundBrush}"
+    >
 
     <Page.Resources>
         <sensors:BrightnessController x:Key="brightnessController"/>
@@ -34,8 +36,8 @@
                 <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='dddd'}"/>
             </Viewbox>
 
-            <Viewbox Stretch="Uniform" Grid.Row="1" Margin="-64">
-                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='t'}"/>
+            <Viewbox Stretch="Uniform" Grid.Row="1">
+                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='t'}" Margin="-2"/>
             </Viewbox>
 
             <Viewbox Stretch="Uniform" Grid.Row="2">
@@ -56,10 +58,18 @@
             </Viewbox>
 
         </Grid>
-        
+
         <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource brightnessController}, Path=Brightness}"/>
 
-        <local:SettingsControl Width="800" Height="600" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16"/>
+        <local:SettingsControl x:Name="settings" Width="800" Height="600" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16" Visibility="Collapsed"/>
 
+        <controls:TimeSliderControl x:Name="testTime" TimeController="{StaticResource timeController}" VerticalAlignment="Top" Margin="16" Visibility="Collapsed"/>
+
+        <Button x:Name="settingsButton" Background="Transparent" Width="100" Height="100" Margin="8" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                 common:CustomRoutedCommand.Command="{StaticResource OpenSettingsCommand}">
+            <Viewbox>
+                <SymbolIcon Symbol="Setting" Foreground="{ThemeResource appForegroundBrush}"/>
+            </Viewbox>
+        </Button>
     </Grid>
 </Page>

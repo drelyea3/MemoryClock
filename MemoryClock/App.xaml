@@ -3,6 +3,20 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MemoryClock"
-    RequestedTheme="Dark">
+    xmlns:commands="using:MemoryClock.Commands"
+    RequestedTheme="Dark"
+    >
+    <Application.Resources>
+        <Color x:Key="appForegroundColor">YellowGreen</Color>
+        <SolidColorBrush x:Key="appForegroundBrush" Color="{ThemeResource appForegroundColor}"/>
+
+        <commands:OpenSettingsCommand x:Key="OpenSettingsCommand"/>
+        <commands:SaveSettingsCommand x:Key="SaveSettingsCommand"/>
+        <commands:CloseSettingsCommand x:Key="CloseSettingsCommand"/>
+        <commands:StartTestingCommand x:Key="StartTestingCommand"/>
+        <commands:StopTestingCommand x:Key="StopTestingCommand"/>
+        <commands:AccessGrantedCommand x:Key="AccessGrantedCommand"/>
+        <commands:AccessRevokedCommand x:Key="AccessRevokedCommand"/>
+    </Application.Resources>
 
 </Application>

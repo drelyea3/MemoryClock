@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\Commands.cs" />
     <Compile Include="Common\CacheManager.cs" />
     <Compile Include="Common\CommandQueue.cs" />
     <Compile Include="Common\CustomRoutedCommand.cs" />
@@ -129,6 +130,9 @@
       <DependentUpon>BrightnessOverlayControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RadioToggle.cs" />
+    <Compile Include="Controls\TimeSliderControl.xaml.cs">
+      <DependentUpon>TimeSliderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BurninMarginConverter.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Converters\NoPhoneConverter.cs" />
@@ -170,6 +174,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\BrightnessOverlayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimeSliderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
