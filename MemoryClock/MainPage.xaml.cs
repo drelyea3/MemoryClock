@@ -13,8 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace MemoryClock
 {
     /// <summary>
@@ -24,6 +22,9 @@ namespace MemoryClock
     {
         public MainPage()
         {
+            //Global.DeleteSettings();
+            Global.Initialize();
+
             this.InitializeComponent();
         }
     }

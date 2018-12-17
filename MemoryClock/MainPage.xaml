@@ -16,7 +16,9 @@
         <sensors:BrightnessController x:Key="brightnessController"/>
         <sensors:TimeController x:Key="timeController"/>
         <converters:DateTimeConverter x:Key="dateTime"/>
+        <converters:TimeOfDayConverter x:Key="timeOfDay"/>
         <converters:BurninMarginConverter x:Key="burnin"/>
+        <converters:NoPhoneConverter x:Key="noPhone"/>
     </Page.Resources>
 
     <Grid>
@@ -37,16 +39,15 @@
             </Viewbox>
 
             <Viewbox Stretch="Uniform" Grid.Row="2">
-                <TextBlock Text="Nighttime!"/>
-                <!--<TextBlock Text="{Binding Converter={StaticResource timeOfDay}}"/>-->
+                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource timeOfDay}}"/>
             </Viewbox>
 
             <Viewbox Stretch="Uniform" Grid.Row="2"  HorizontalAlignment="Left" Margin="16,0">
                 <StackPanel Orientation="Horizontal">
-                    <Grid><!--Visibility="{Binding Converter={StaticResource noPhone}}">-->
-                            <SymbolIcon Symbol="Phone"/>
-                            <SymbolIcon Symbol="Clear" Foreground="Red"/>
-                        </Grid>
+                    <Grid Visibility="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource noPhone}}">
+                        <SymbolIcon Symbol="Phone"/>
+                        <SymbolIcon Symbol="Clear" Foreground="Red"/>
+                    </Grid>
                 </StackPanel>
             </Viewbox>
 

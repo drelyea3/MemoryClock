@@ -94,6 +94,7 @@ namespace MemoryClock
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            Global.Suspending();
             deferral.Complete();
         }
     }

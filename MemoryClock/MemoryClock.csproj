@@ -119,12 +119,21 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\CacheManager.cs" />
+    <Compile Include="Common\CommandQueue.cs" />
+    <Compile Include="Common\CustomRoutedCommand.cs" />
+    <Compile Include="Common\Schedule.cs" />
+    <Compile Include="Common\VisualTreeEnumerators.cs" />
+    <Compile Include="Common\WindowEvents.cs" />
     <Compile Include="Controls\BrightnessOverlayControl.xaml.cs">
       <DependentUpon>BrightnessOverlayControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BurninMarginConverter.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />
+    <Compile Include="Converters\NoPhoneConverter.cs" />
     <Compile Include="Converters\OneWayConverter.cs" />
+    <Compile Include="Converters\TimeOfDayConverter.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Sensors\BrightnessController.cs" />
     <Compile Include="Sensors\LuxSensor.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -133,6 +142,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\RollingAverage.cs" />
     <Compile Include="Sensors\TimeController.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -167,6 +177,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
