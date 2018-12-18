@@ -6,7 +6,7 @@ namespace MemoryClock
 {
     public static class Global
     {
-        public static Settings Settings { get; private set; }
+        public static Settings.Settings Settings { get; private set; }
 
         public static void Initialize()
         {
@@ -19,7 +19,7 @@ namespace MemoryClock
 
         private static void InitializeSettings()
         {
-            Settings settings;
+            Settings.Settings settings;
             if (CacheManager.TryLoad("Settings", out settings))
             {
                 Settings = settings;
@@ -32,7 +32,7 @@ namespace MemoryClock
 
         public static void ResetSettings()
         {
-            Settings = new Settings();
+            Settings = new Settings.Settings();
             Settings.LoadDefaults();
         }
 

@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace MemoryClock
+namespace MemoryClock.Settings
 {
     public sealed partial class MessagesSettingsControl : UserControl
     {

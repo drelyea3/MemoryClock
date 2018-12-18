@@ -1,7 +1,7 @@
 ﻿using Common;
 using System;
 
-namespace MemoryClock
+namespace MemoryClock.Settings
 {
     public class Settings
     {
