@@ -1,16 +1,16 @@
 ﻿<UserControl
-    x:Class="MemoryClock.Settings.MessagesSettingsControl"
+    x:Class="MemoryClock.Settings.NoCallSettingsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Common"
+    xmlns:controls="using:MemoryClock.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
         <common:TimeDataSource x:Key="timeSource"/>
-
         <DataTemplate x:Key="eventTemplate">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Width="110" Foreground="{StaticResource appForegroundBrush}" FontSize="24" Text="{Binding Path=Start, Converter={StaticResource timeSpanTime}, ConverterParameter='t'}"/>
@@ -18,7 +18,7 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
@@ -31,10 +31,10 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock 
-                Text="Messages" 
+                Text="No call showing" 
                 Foreground="{StaticResource appForegroundBrush}" 
                 FontSize="24"/>
-            <ListView x:Name="messages" 
+            <ListView x:Name="schedule" 
                       Grid.Row="1" 
                       ItemTemplate="{StaticResource eventTemplate}"
                       Background="#40FFFFFF" 
@@ -62,16 +62,32 @@
                 VerticalAlignment="Top" 
                 FontSize="24" 
                 SelectionChanged="OnTimeChanged"/>
-            <TextBlock 
-                Text="Message" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                FontSize="24"/>
-            <TextBox 
-                x:Name="message" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                VerticalAlignment="Top" 
-                FontSize="24"
-                TextChanged="OnMessageChanged"/>
+            <TextBlock Text="Showing" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <controls:RadioToggle
+                    x:Name="showing" 
+                    Content="Yes"
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    HorizontalAlignment="Stretch"
+                    Margin="0,0,4,0"
+                    FontSize="24"
+                    Checked="OnIsShowingChecked"
+                    />
+                <controls:RadioToggle
+                    x:Name="notShowing" 
+                    Content="No"
+                    Grid.Column="1"
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    HorizontalAlignment="Stretch"
+                    Margin="4,0,0,0"
+                    FontSize="24"
+                    Checked="OnIsShowingChecked"
+                    />
+            </Grid>
             <Button 
                 x:Name="add" 
                 Margin="0,8" 

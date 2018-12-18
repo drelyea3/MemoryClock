@@ -24,6 +24,10 @@
         <converters:TimeOfDayConverter x:Key="timeOfDay"/>
         <converters:BurninMarginConverter x:Key="burnin"/>
         <converters:NoPhoneConverter x:Key="noPhone"/>
+        <!-- Templates -->
+        <DataTemplate x:Key="timeTemplate">
+            <TextBlock Foreground="{StaticResource appForegroundBrush}" FontSize="24" Text="{Binding Converter={StaticResource timeSpanTime}, ConverterParameter='t'}"/>
+        </DataTemplate>
 
     </Application.Resources>
 

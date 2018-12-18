@@ -39,7 +39,7 @@
             <controls:RadioToggle 
                 GroupName="setting" 
                 Background="Transparent" 
-                Tag="noCall" 
+                Tag="noCallPage" 
                 Click="OnPageSelected">
                 <controls:RadioToggle.Content>
                     <Viewbox>
@@ -122,7 +122,8 @@
             CornerRadius="8" Margin="0,-8,-8,0"
             Background="#c0000000"
             >
-            <local:MessagesSettingsControl x:Name="messagePage"/>
+            <local:MessagesSettingsControl x:Name="messagePage" Visibility="Collapsed"/>
+            <local:NoCallSettingsControl x:Name="noCallPage" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </UserControl>
