@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MemoryClock"
     xmlns:commands="using:MemoryClock.Commands"
+    xmlns:converters="using:MemoryClock.Converters"
     RequestedTheme="Dark"
     >
     <Application.Resources>
@@ -17,6 +18,13 @@
         <commands:StopTestingCommand x:Key="StopTestingCommand"/>
         <commands:AccessGrantedCommand x:Key="AccessGrantedCommand"/>
         <commands:AccessRevokedCommand x:Key="AccessRevokedCommand"/>
+        <!-- Converters -->
+        <converters:DateTimeConverter x:Key="dateTime"/>
+        <converters:TimeSpanToTimeConverter x:Key="timeSpanTime"/>
+        <converters:TimeOfDayConverter x:Key="timeOfDay"/>
+        <converters:BurninMarginConverter x:Key="burnin"/>
+        <converters:NoPhoneConverter x:Key="noPhone"/>
+
     </Application.Resources>
 
 </Application>

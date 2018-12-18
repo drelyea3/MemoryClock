@@ -22,6 +22,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <StackPanel BorderBrush="{StaticResource appForegroundBrush}" BorderThickness="0,0,8,0" Width="80" Grid.RowSpan="999">
             <controls:RadioToggle GroupName="setting" Background="Transparent">
                 <controls:RadioToggle.Content>
@@ -60,10 +61,15 @@
             </controls:RadioToggle>
 
         </StackPanel>
+        
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,8" Grid.Column="1">
             <Button Content="Test" Width="100" Margin="8,0" FontSize="24" Foreground="{StaticResource appForegroundBrush}" common:CustomRoutedCommand.Command="{StaticResource StartTestingCommand}"/>
             <Button Content="Cancel" Width="100" Margin="8,0,0,0" FontSize="24" Foreground="{StaticResource appForegroundBrush}" common:CustomRoutedCommand.Command="{StaticResource CloseSettingsCommand}"/>
             <Button Content="OK" Width="100" Margin="8,0" FontSize="24" Foreground="{ThemeResource appForegroundBrush}"/>
         </StackPanel>
+
+        <Grid Grid.Column="1" Padding="16">
+            <local:MessagesSettingsControl/>
+        </Grid>
     </Grid>
 </UserControl>

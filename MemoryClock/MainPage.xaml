@@ -17,10 +17,6 @@
     <Page.Resources>
         <sensors:BrightnessController x:Key="brightnessController"/>
         <sensors:TimeController x:Key="timeController"/>
-        <converters:DateTimeConverter x:Key="dateTime"/>
-        <converters:TimeOfDayConverter x:Key="timeOfDay"/>
-        <converters:BurninMarginConverter x:Key="burnin"/>
-        <converters:NoPhoneConverter x:Key="noPhone"/>
     </Page.Resources>
 
     <Grid>

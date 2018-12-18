@@ -124,6 +124,7 @@
     <Compile Include="Common\CommandQueue.cs" />
     <Compile Include="Common\CustomRoutedCommand.cs" />
     <Compile Include="Common\Schedule.cs" />
+    <Compile Include="Common\TimeDataSource.cs" />
     <Compile Include="Common\VisualTreeEnumerators.cs" />
     <Compile Include="Common\WindowEvents.cs" />
     <Compile Include="Controls\BrightnessOverlayControl.xaml.cs">
@@ -138,6 +139,7 @@
     <Compile Include="Converters\NoPhoneConverter.cs" />
     <Compile Include="Converters\OneWayConverter.cs" />
     <Compile Include="Converters\TimeOfDayConverter.cs" />
+    <Compile Include="Converters\TimeSpanToTimeConverter.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Sensors\BrightnessController.cs" />
     <Compile Include="Sensors\LuxSensor.cs" />
@@ -148,6 +150,9 @@
     <Compile Include="Common\RollingAverage.cs" />
     <Compile Include="Sensors\TimeController.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Settings\MessagesControl.xaml.cs">
+      <DependentUpon>MessagesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
@@ -184,6 +189,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\MessagesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Settings\SettingsControl.xaml">
       <SubType>Designer</SubType>
