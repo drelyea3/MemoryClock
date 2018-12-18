@@ -57,9 +57,25 @@
 
         <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource brightnessController}, Path=Brightness}"/>
 
-        <settings:SettingsControl x:Name="settings" Width="800" Height="600" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16" Visibility="Collapsed"/>
+        <settings:SettingsControl
+            x:Name="settings" 
+            x:Load="False"
+            Width="800" 
+            Height="600" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="16" 
+            Visibility="Collapsed"
+            />
 
-        <controls:TimeSliderControl x:Name="testTime" TimeController="{StaticResource timeController}" VerticalAlignment="Top" Margin="16" Visibility="Collapsed"/>
+        <controls:TimeSliderControl
+            x:Name="testTime" 
+            x:Load="False"
+            TimeController="{StaticResource timeController}" 
+            VerticalAlignment="Top" 
+            Margin="16" 
+            Visibility="Collapsed"
+            />
 
         <Button x:Name="settingsButton" Background="Transparent" Width="100" Height="100" Margin="8" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                  common:CustomRoutedCommand.Command="{StaticResource OpenSettingsCommand}">

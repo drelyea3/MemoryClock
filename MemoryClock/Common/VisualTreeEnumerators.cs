@@ -6,7 +6,7 @@ namespace Common
 {
     public static class VisualTreeEnumerators
     {
-        public static IEnumerable<T> GetAncestorsAndSelf<T>(this DependencyObject self) where T : DependencyObject
+        public static IEnumerable<T> GetAncestorsAndSelf<T>(this DependencyObject self) where T : class
         {
             DependencyObject parent = self;
             while (parent != null)
@@ -45,18 +45,25 @@ namespace Common
             return GetAncestors<UIElement>(self);
         }
 
-        public static IEnumerable<UIElement> GetChildren(this DependencyObject self)
+        public static IEnumerable<T> GetChildren<T>(this DependencyObject self) where T : class
         {
             for (int index = 0; index < VisualTreeHelper.GetChildrenCount(self); ++index)
             {
-                UIElement child = VisualTreeHelper.GetChild(self, index) as UIElement;
-                if (child != null)
+                DependencyObject child = VisualTreeHelper.GetChild(self, index);
+                T typedChild = child as T;
+                if (typedChild != null)
                 {
-                    yield return child;
+                    yield return typedChild;
                 }
             }
         }
-        public static IEnumerable<T> GetDescendants<T>(this DependencyObject self) where T : DependencyObject
+
+        public static IEnumerable<UIElement> GetChildren(this DependencyObject self)
+        {
+            return GetChildren<UIElement>(self);
+        }
+
+        public static IEnumerable<T> GetDescendants<T>(this DependencyObject self) where T : class
         {
             for (int index = 0; index < VisualTreeHelper.GetChildrenCount(self); ++index)
             {
@@ -68,7 +75,7 @@ namespace Common
                     {
                         yield return typedChild;
                     }
-                    foreach (DependencyObject descendant in GetDescendants<T>(child))
+                    foreach (var descendant in GetDescendants<T>(child))
                     {
                         T typedDescendant = descendant as T;
                         if (typedDescendant != null)
@@ -85,5 +92,4 @@ namespace Common
             return GetDescendants<UIElement>(self);
         }
     }
-
 }

@@ -33,7 +33,10 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Messages" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
+            <TextBlock 
+                Text="Messages" 
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24"/>
             <ListView x:Name="messages" 
                       Grid.Row="1" 
                       ItemTemplate="{StaticResource eventTemplate}"
@@ -41,7 +44,16 @@
                       Margin="0,0,16,0" 
                       Foreground="{StaticResource appForegroundBrush}" 
                       SelectionChanged="OnSelectionChanged"/>
-            <Button x:Name="delete" Grid.Row="2" Margin="0,8" Width="100" Content="Delete" Foreground="{StaticResource appForegroundBrush}" FontSize="24" Click="OnDelete" IsEnabled="False"/>
+            <Button 
+                x:Name="delete" 
+                Grid.Row="2" 
+                Margin="0,8,0,0" 
+                Width="100" 
+                Content="Delete" 
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24" 
+                Click="OnDelete" 
+                IsEnabled="False"/>
         </Grid>
         <StackPanel Grid.Column="1">
             <TextBlock Text="Time of day" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
@@ -53,14 +65,25 @@
                 VerticalAlignment="Top" 
                 FontSize="24" 
                 SelectionChanged="OnTimeChanged"/>
-            <TextBlock Text="Message" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
+            <TextBlock 
+                Text="Message" 
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24"/>
             <TextBox 
                 x:Name="message" 
                 Foreground="{StaticResource appForegroundBrush}" 
                 VerticalAlignment="Top" 
                 FontSize="24"
                 TextChanged="OnMessageChanged"/>
-            <Button x:Name="add" Margin="0,8" Width="100" Content="Add" Foreground="{StaticResource appForegroundBrush}" FontSize="24" Click="OnAdd" IsEnabled="False"/>
+            <Button 
+                x:Name="add" 
+                Margin="0,8" 
+                Width="100" 
+                Content="Add" 
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24" 
+                Click="OnAdd" 
+                IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </UserControl>

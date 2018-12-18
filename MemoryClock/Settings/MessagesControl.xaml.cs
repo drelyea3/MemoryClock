@@ -17,16 +17,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MemoryClock.Settings
 {
-    public sealed partial class MessagesSettingsControl : UserControl
+    public sealed partial class MessagesSettingsControl : UserControl, ISettingsPage
     {
         ObservableCollection<Event<string>> events;
 
         public MessagesSettingsControl()
         {
             this.InitializeComponent();
-
-            events = new ObservableCollection<Event<string>>(Global.Settings.Message.Events);
-            messages.ItemsSource = events;
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,6 +72,38 @@ namespace MemoryClock.Settings
         private void OnMessageChanged(object sender, TextChangedEventArgs e)
         {
             add.IsEnabled = time.SelectedItem != null && !string.IsNullOrWhiteSpace(message.Text);
+        }
+
+        public void Show()
+        {
+            this.Visibility = Visibility.Visible;
+            if (events == null)
+            {
+                events = new ObservableCollection<Event<string>>(Global.Settings.Message.Events);
+                messages.ItemsSource = events;
+            }
+        }
+
+        public void Hide()
+        {
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        public void Cancel()
+        {
+            events = null;
+        }
+
+        public void Save()
+        {
+            if (events != null)
+            {
+                Global.Settings.Message.Clear();
+                foreach (var e in events)
+                {
+                    Global.Settings.Message.Add(e);
+                }
+            }
         }
     }
 }

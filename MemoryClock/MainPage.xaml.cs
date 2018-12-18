@@ -47,23 +47,33 @@ namespace MemoryClock
 
             if (command is OpenSettingsCommand)
             {
-                settings.Visibility = Visibility.Visible;
+                FindName(nameof(settings));
+
+                settings.Show();
                 UpdateAccess(false);
             }
             else if (command is CloseSettingsCommand)
             {
-                settings.Visibility = Visibility.Collapsed;
+                FindName(nameof(settings));
+
+                settings.Hide();
                 UpdateAccess(true);
             }
             else if (command is StartTestingCommand)
             {
-                settings.Visibility = Visibility.Collapsed;
+                FindName(nameof(settings));
+                FindName(nameof(testTime));
+
+                settings.Hide();
                 testTime.Visibility = Visibility.Visible;
                 testTime.IsActive = true;
             }
             else if (command is StopTestingCommand)
             {
-                settings.Visibility = Visibility.Visible;
+                FindName(nameof(settings));
+                FindName(nameof(testTime));
+
+                settings.Show();
                 testTime.Visibility = Visibility.Collapsed;
                 testTime.IsActive = false;
             }
