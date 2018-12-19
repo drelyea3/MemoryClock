@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Commands\Commands.cs" />
     <Compile Include="Common\CacheManager.cs" />
+    <Compile Include="Common\Clone.cs" />
     <Compile Include="Common\CommandQueue.cs" />
     <Compile Include="Common\CustomRoutedCommand.cs" />
     <Compile Include="Common\Schedule.cs" />

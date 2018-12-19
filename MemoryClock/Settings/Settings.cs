@@ -21,7 +21,7 @@ namespace MemoryClock.Settings
         {
             IsDim.Events = new Event<bool>[]
             {
-                new Event<bool>() { Start = new TimeSpan(6,0,0), Value = false },
+                new Event<bool>() { Start = new TimeSpan(7,0,0), Value = false },
                 new Event<bool>() { Start = new TimeSpan(20,0,0), Value = true },
             };
 
