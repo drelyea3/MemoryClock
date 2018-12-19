@@ -22,29 +22,30 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
-            <Viewbox Stretch="Uniform" Margin="16,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Viewbox Stretch="Uniform" Margin="16,0" Grid.ColumnSpan="2">
                 <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='dddd'}"/>
             </Viewbox>
 
-            <Viewbox Stretch="Uniform" Grid.Row="1">
+            <Viewbox Stretch="Uniform" Grid.Row="1" Grid.ColumnSpan="2">
                 <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='t'}" Margin="-2"/>
             </Viewbox>
 
-            <Viewbox Stretch="Uniform" Grid.Row="2">
+            <Viewbox Stretch="Uniform" Grid.Row="2" Grid.Column="1">
                 <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource timeOfDay}}"/>
             </Viewbox>
-
-            <Viewbox Stretch="Uniform" Grid.Row="2"  HorizontalAlignment="Left" Margin="16,0">
-                <StackPanel Orientation="Horizontal">
-                    <Grid Visibility="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource noPhone}}">
-                        <SymbolIcon Symbol="Phone"/>
-                        <SymbolIcon Symbol="Clear" Foreground="Red"/>
-                    </Grid>
-                </StackPanel>
+            <Viewbox Grid.Row="2">
+                <Grid Visibility="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource noPhone}}" Grid.Column="0">
+                    <SymbolIcon Symbol="Phone"/>
+                    <SymbolIcon Symbol="Clear" Foreground="Red"/>
+                </Grid>
             </Viewbox>
 
-            <Viewbox Stretch="Uniform" Grid.Row="3" Margin="16,0">
+            <Viewbox Stretch="Uniform" Grid.Row="3" Margin="16,0" Grid.ColumnSpan="2">
                 <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='MMMM d, yyyy'}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
             </Viewbox>
 
