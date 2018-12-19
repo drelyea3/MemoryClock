@@ -14,10 +14,6 @@
     Foreground="{ThemeResource appForegroundBrush}"
     >
 
-    <Page.Resources>
-        <sensors:BrightnessController x:Key="brightnessController"/>
-    </Page.Resources>
-
     <Grid>
         <Grid Margin="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource burnin}}">
             <Grid.RowDefinitions>
@@ -61,7 +57,7 @@
             </Viewbox>
         </Button>
 
-        <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource brightnessController}, Path=Brightness}" IsHitTestVisible="False"/>
+        <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource BrightnessSource}, Path=Brightness}" IsHitTestVisible="False"/>
 
         <settings:SettingsControl
             x:Name="settings" 

@@ -164,6 +164,7 @@
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsPage.cs" />
+    <Compile Include="Workers\BrightnessSourceWorker.cs" />
     <Compile Include="Workers\TimeSourceWorker.cs" />
     <Compile Include="Workers\Worker.cs" />
   </ItemGroup>

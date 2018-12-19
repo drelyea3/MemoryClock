@@ -8,6 +8,7 @@ namespace MemoryClock.Settings
         public int TickInterval { get; set; } = 100;
 
         public double MaxLux { get; set; } = 100.0;
+        public double DayBrightness { get; set; } = 1.0;
         public double NightBrightness { get; set; } = 0.2;
         public TimeSpan LightSensorInterval { get; set; } = TimeSpan.FromSeconds(2);
 

@@ -39,7 +39,7 @@
             <ListView x:Name="schedule" 
                       Grid.Row="1" 
                       ItemTemplate="{StaticResource eventTemplate}"
-                      Background="#40FFFFFF" 
+                      Background="{StaticResource LightSmoke}" 
                       Margin="0,0,16,0" 
                       Foreground="{StaticResource appForegroundBrush}" 
                       SelectionChanged="OnSelectionChanged"/>

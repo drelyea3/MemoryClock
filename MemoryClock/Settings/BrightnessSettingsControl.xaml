@@ -40,7 +40,7 @@
             <ListView x:Name="schedule" 
                       Grid.Row="1" 
                       ItemTemplate="{StaticResource eventTemplate}"
-                      Background="#40FFFFFF" 
+                      Background="{StaticResource LightSmoke}" 
                       Margin="0,0,16,0" 
                       Foreground="{StaticResource appForegroundBrush}" 
                       SelectionChanged="OnSelectionChanged"/>
@@ -137,6 +137,15 @@
                 IsThumbToolTipEnabled="False"
                 ValueChanged="OnSliderValueChange"
             />
+            <TextBlock 
+                Text="Lux sensor" 
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24"/>
+            <TextBlock 
+                Text="{Binding Source={StaticResource BrightnessSource}, Path=Lux}"
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24"/>
+
         </StackPanel>
         
         

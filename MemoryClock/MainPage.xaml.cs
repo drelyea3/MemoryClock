@@ -38,7 +38,6 @@ namespace MemoryClock
 
                 settings.Show();
                 UpdateAccess(false);
-
             }
             else if (command is CloseSettingsCommand)
             {

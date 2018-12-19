@@ -28,7 +28,7 @@ namespace MemoryClock.Sensors
         }
 
         public static readonly DependencyProperty BrightnessProperty =
-            DependencyProperty.Register("Brightness", typeof(double), typeof(BrightnessController), new PropertyMetadata(1.0));
+            DependencyProperty.Register("Brightness", typeof(double), typeof(BrightnessController), new PropertyMetadata(0.0));
 
         public BrightnessController()
         {

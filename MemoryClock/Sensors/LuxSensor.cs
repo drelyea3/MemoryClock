@@ -39,29 +39,36 @@ namespace MemoryClock.Sensors
         {
             var result = new LuxSensor();
 
-            string aqs = I2cDevice.GetDeviceSelector();
-            var disTask = DeviceInformation.FindAllAsync(aqs).AsTask();
-            disTask.Wait();
-            var dis = disTask.Result;
-            Debug.WriteLine($"Found {dis.Count} devices");
-            if (dis.Count == 0)
+            try
             {
-                // No devices found -- was this run on a PC?
-                return null;
+                string aqs = I2cDevice.GetDeviceSelector();
+                var disTask = DeviceInformation.FindAllAsync(aqs).AsTask();
+                disTask.Wait();
+                var dis = disTask.Result;
+                Debug.WriteLine($"Found {dis.Count} devices");
+                if (dis.Count == 0)
+                {
+                    // No devices found -- was this run on a PC?
+                    return null;
+                }
+
+                var settings = new I2cConnectionSettings(0x39);
+                settings.BusSpeed = I2cBusSpeed.FastMode;
+                settings.SharingMode = I2cSharingMode.Shared;
+                var did = dis[0].Id;
+                Debug.WriteLine($"Device {did}");
+                var deviceTask = I2cDevice.FromIdAsync(did, settings).AsTask();
+                deviceTask.Wait();
+                result.device = deviceTask.Result;
+
+                result.Write8(TSL2561_REG_CONTROL, 0x03);
+
+                result.SetTiming(gain, sensitivity);
             }
-
-            var settings = new I2cConnectionSettings(0x39);
-            settings.BusSpeed = I2cBusSpeed.FastMode;
-            settings.SharingMode = I2cSharingMode.Shared;
-            var did = dis[0].Id;
-            Debug.WriteLine($"Device {did}");
-            var deviceTask = I2cDevice.FromIdAsync(did, settings).AsTask();
-            deviceTask.Wait();
-            result.device = deviceTask.Result;
-
-            result.Write8(TSL2561_REG_CONTROL, 0x03);
-
-            result.SetTiming(gain, sensitivity);
+            catch
+            {
+                result = null;
+            }
 
             return result;
         }

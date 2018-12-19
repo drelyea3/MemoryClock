@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace MemoryClock.Workers
             AsyncInfo?.Cancel();
         }
 
-        protected TimeSpan Interval { get; set; } = TimeSpan.FromSeconds(1);
+        public TimeSpan Interval { get; set; } = TimeSpan.FromSeconds(1);
 
         protected abstract bool DoWork();
 
@@ -34,11 +35,20 @@ namespace MemoryClock.Workers
         {
             while (operation.Status == AsyncStatus.Started)
             {
-                var shouldCancel = !DoWork();
-                if (shouldCancel)
+                try
                 {
+                    var shouldCancel = !DoWork();
+                    if (shouldCancel)
+                    {
+                        operation.Cancel();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine($"Worker {this.GetType()} raised an exception {e}");
                     operation.Cancel();
                 }
+
                 Task.Delay((int)Interval.TotalMilliseconds).Wait();
             }
         }

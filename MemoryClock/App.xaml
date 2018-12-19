@@ -10,10 +10,13 @@
     >
     <Application.Resources>
         <!-- Workers -->
-        <workers:TimeSourceWorker x:Key="TimeSource"/>
+        <workers:TimeSourceWorker x:Key="TimeSource" Interval="0:0:1"/>
+        <workers:BrightnessSourceWorker x:Key="BrightnessSource" TimeSource="{StaticResource TimeSource}" Interval="0:0:1"/>
         
         <Color x:Key="appForegroundColor">YellowGreen</Color>
         <SolidColorBrush x:Key="appForegroundBrush" Color="{ThemeResource appForegroundColor}"/>
+        <AcrylicBrush x:Key="DarkSmoke" TintColor="Black" TintOpacity=".2" BackgroundSource="Backdrop" FallbackColor="#c0ffffff"/>
+        <AcrylicBrush x:Key="LightSmoke" TintColor="White" TintOpacity=".05" BackgroundSource="Backdrop" FallbackColor="#40ffffff"/>
 
         <commands:OpenSettingsCommand x:Key="OpenSettingsCommand"/>
         <commands:SaveSettingsCommand x:Key="SaveSettingsCommand"/>
