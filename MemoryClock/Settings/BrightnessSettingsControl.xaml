@@ -55,12 +55,13 @@
                 Click="OnDelete" 
                 IsEnabled="False"/>
         </Grid>
-        <StackPanel Grid.Column="1">
-            <TextBlock 
+        <ScrollViewer Grid.Column="1">
+            <StackPanel>
+                <TextBlock 
                 Text="Time of day" 
                 Foreground="{StaticResource appForegroundBrush}" 
                 FontSize="24"/>
-            <ComboBox 
+                <ComboBox 
                 x:Name="time" 
                 ItemsSource="{StaticResource timeSource}" 
                 ItemTemplate="{StaticResource timeTemplate}" 
@@ -68,13 +69,13 @@
                 VerticalAlignment="Top" 
                 FontSize="24" 
                 SelectionChanged="OnTimeChanged"/>
-            <Grid Margin="0,8,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="14*"/>
-                    <ColumnDefinition Width="61*"/>
-                    <ColumnDefinition Width="75*"/>
-                </Grid.ColumnDefinitions>
-                <controls:RadioToggle
+                <Grid Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="61*"/>
+                        <ColumnDefinition Width="75*"/>
+                    </Grid.ColumnDefinitions>
+                    <controls:RadioToggle
                     x:Name="dim" 
                     Content="Dim"
                     Foreground="{StaticResource appForegroundBrush}" 
@@ -83,7 +84,7 @@
                     FontSize="24"
                     Checked="OnIsShowingChecked" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     />
-                <controls:RadioToggle
+                    <controls:RadioToggle
                     x:Name="bright" 
                     Content="Bright"
                     Grid.Column="2"
@@ -93,8 +94,8 @@
                     FontSize="24"
                     Checked="OnIsShowingChecked" VerticalAlignment="Center"
                     />
-            </Grid>
-            <Button 
+                </Grid>
+                <Button 
                 x:Name="add" 
                 Margin="0,8" 
                 Width="100" 
@@ -103,11 +104,11 @@
                 FontSize="24" 
                 Click="OnAdd" 
                 IsEnabled="False"/>
-            <TextBlock 
+                <TextBlock 
                 Text="Dim level" 
                 Foreground="{StaticResource appForegroundBrush}" 
                 FontSize="24"/>
-            <Grid
+                <Grid
 
                 Height="100" 
                 Background="Black"
@@ -115,21 +116,21 @@
                 BorderThickness="4"
                 CornerRadius="4"
                 >
-                <Viewbox>
-                    <TextBlock
+                    <Viewbox>
+                        <TextBlock
                         Text="1:00" 
                         Foreground="{StaticResource appForegroundBrush}" 
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         FontSize="24"/>
-                </Viewbox>
-                <controls:BrightnessOverlayControl 
+                    </Viewbox>
+                    <controls:BrightnessOverlayControl 
                     x:Name="brightnessOverlay"
                     Brightness="1.0" 
                     Duration="1"
                     />
-            </Grid>
-            <Slider 
+                </Grid>
+                <Slider 
                 x:Name="brightnessSlider"
                 Minimum="0" 
                 Maximum="100"
@@ -137,18 +138,18 @@
                 IsThumbToolTipEnabled="False"
                 ValueChanged="OnSliderValueChange"
             />
-            <TextBlock 
+                <TextBlock 
                 Text="Lux sensor" 
                 Foreground="{StaticResource appForegroundBrush}" 
                 FontSize="24"/>
-            <TextBlock 
+                <TextBlock 
                 Text="{Binding Source={StaticResource BrightnessSource}, Path=Lux}"
                 Foreground="{StaticResource appForegroundBrush}" 
                 FontSize="24"/>
 
-        </StackPanel>
-        
-        
+            </StackPanel>
+
+        </ScrollViewer>
     </Grid>
 
 </UserControl>

@@ -18,7 +18,7 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
@@ -52,35 +52,37 @@
                 Click="OnDelete" 
                 IsEnabled="False"/>
         </Grid>
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="Time of day" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
-            <ComboBox 
-                x:Name="time" 
-                ItemsSource="{StaticResource timeSource}" 
-                ItemTemplate="{StaticResource timeTemplate}" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                VerticalAlignment="Top" 
-                FontSize="24" 
-                SelectionChanged="OnTimeChanged"/>
-            <TextBlock 
-                Text="Message" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                FontSize="24"/>
-            <TextBox 
-                x:Name="message" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                VerticalAlignment="Top" 
-                FontSize="24"
-                TextChanged="OnMessageChanged"/>
-            <Button 
-                x:Name="add" 
-                Margin="0,8" 
-                Width="100" 
-                Content="Add" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                FontSize="24" 
-                Click="OnAdd" 
-                IsEnabled="False"/>
-        </StackPanel>
+        <ScrollViewer Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="Time of day" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
+                <ComboBox 
+                    x:Name="time" 
+                    ItemsSource="{StaticResource timeSource}" 
+                    ItemTemplate="{StaticResource timeTemplate}" 
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    VerticalAlignment="Top" 
+                    FontSize="24" 
+                    SelectionChanged="OnTimeChanged"/>
+                <TextBlock 
+                    Text="Message" 
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    FontSize="24"/>
+                <TextBox 
+                    x:Name="message" 
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    VerticalAlignment="Top" 
+                    FontSize="24"
+                    TextChanged="OnMessageChanged"/>
+                <Button 
+                    x:Name="add" 
+                    Margin="0,8" 
+                    Width="100" 
+                    Content="Add" 
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    FontSize="24" 
+                    Click="OnAdd" 
+                    IsEnabled="False"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

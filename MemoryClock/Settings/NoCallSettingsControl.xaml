@@ -54,51 +54,53 @@
                 Click="OnDelete" 
                 IsEnabled="False"/>
         </Grid>
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="Time of day" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
-            <ComboBox 
-                x:Name="time" 
-                ItemsSource="{StaticResource timeSource}" 
-                ItemTemplate="{StaticResource timeTemplate}" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                VerticalAlignment="Top" 
-                FontSize="24" 
-                SelectionChanged="OnTimeChanged"/>
-            <TextBlock Text="Showing" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <controls:RadioToggle
-                    x:Name="showing" 
-                    Content="Yes"
+        <ScrollViewer Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="Time of day" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
+                <ComboBox 
+                    x:Name="time" 
+                    ItemsSource="{StaticResource timeSource}" 
+                    ItemTemplate="{StaticResource timeTemplate}" 
                     Foreground="{StaticResource appForegroundBrush}" 
-                    HorizontalAlignment="Stretch"
-                    Margin="0,0,4,0"
-                    FontSize="24"
-                    Checked="OnIsShowingChecked"
-                    />
-                <controls:RadioToggle
-                    x:Name="notShowing" 
-                    Content="No"
-                    Grid.Column="1"
+                    VerticalAlignment="Top" 
+                    FontSize="24" 
+                    SelectionChanged="OnTimeChanged"/>
+                <TextBlock Text="Showing" Foreground="{StaticResource appForegroundBrush}" FontSize="24"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <controls:RadioToggle
+                        x:Name="showing" 
+                        Content="Yes"
+                        Foreground="{StaticResource appForegroundBrush}" 
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,4,0"
+                        FontSize="24"
+                        Checked="OnIsShowingChecked"
+                        />
+                    <controls:RadioToggle
+                        x:Name="notShowing" 
+                        Content="No"
+                        Grid.Column="1"
+                        Foreground="{StaticResource appForegroundBrush}" 
+                        HorizontalAlignment="Stretch"
+                        Margin="4,0,0,0"
+                        FontSize="24"
+                        Checked="OnIsShowingChecked"
+                        />
+                </Grid>
+                <Button 
+                    x:Name="add" 
+                    Margin="0,8" 
+                    Width="100" 
+                    Content="Add" 
                     Foreground="{StaticResource appForegroundBrush}" 
-                    HorizontalAlignment="Stretch"
-                    Margin="4,0,0,0"
-                    FontSize="24"
-                    Checked="OnIsShowingChecked"
-                    />
-            </Grid>
-            <Button 
-                x:Name="add" 
-                Margin="0,8" 
-                Width="100" 
-                Content="Add" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                FontSize="24" 
-                Click="OnAdd" 
-                IsEnabled="False"/>
-        </StackPanel>
+                    FontSize="24" 
+                    Click="OnAdd" 
+                    IsEnabled="False"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>
