@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MemoryClock.Workers;
+using System;
+using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -84,8 +86,35 @@ namespace MemoryClock
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            StopWorkers();
             Global.Suspending();
             deferral.Complete();
+        }
+
+        public void StartWorkers()
+        {
+            foreach (var resource in Resources)
+            {
+                var worker = resource.Value as Worker;
+                if (worker != null)
+                {
+                    Debug.WriteLine($"Starting {resource.Key}");
+                    worker.Start();
+                }
+            }
+        }
+
+        public void StopWorkers()
+        {
+            foreach (var resource in Resources)
+            {
+                var worker = resource.Value as Worker;
+                if (worker != null)
+                {
+                    Debug.WriteLine($"Stopping {resource.Key}");
+                    worker.Stop();
+                }
+            }
         }
     }
 }

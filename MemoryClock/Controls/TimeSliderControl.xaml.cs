@@ -1,4 +1,5 @@
 ﻿using MemoryClock.Sensors;
+using MemoryClock.Workers;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -8,14 +9,14 @@ namespace MemoryClock.Controls
 {
     public sealed partial class TimeSliderControl : UserControl
     {
-        public TimeController TimeController
+        public TimeSourceWorker TimeSource
         {
-            get { return (TimeController)GetValue(TimeControllerProperty); }
-            set { SetValue(TimeControllerProperty, value); }
+            get { return (TimeSourceWorker)GetValue(TimeSourceProperty); }
+            set { SetValue(TimeSourceProperty, value); }
         }
 
-        public static readonly DependencyProperty TimeControllerProperty =
-            DependencyProperty.Register("TimeController", typeof(TimeController), typeof(TimeSliderControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty TimeSourceProperty =
+            DependencyProperty.Register("TimeSource", typeof(TimeSourceWorker), typeof(TimeSliderControl), new PropertyMetadata(null));
 
         public bool IsActive
         {
@@ -28,9 +29,16 @@ namespace MemoryClock.Controls
 
         private void OnIsActiveChanged(bool newValue)
         {
-            if (TimeController != null)
+            if (TimeSource != null)
             {
-                TimeController.IsPaused = newValue;
+                if (newValue)
+                {
+                    TimeSource.Stop();
+                }
+                else
+                {
+                    TimeSource.Start();
+                }
             }
 
             timeSlider.IsEnabled = newValue;
@@ -43,14 +51,14 @@ namespace MemoryClock.Controls
 
         private void OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (TimeController != null)
+            if (TimeSource != null)
             {
                 var now = DateTime.Now;
                 var time = TimeSpan.FromMinutes(e.NewValue);
 
                 var dateTime = new DateTime(now.Year, now.Month, now.Day, time.Hours, time.Minutes, time.Seconds);
 
-                TimeController.Update(dateTime);
+                TimeSource.Update(dateTime);
             }
         }
     }

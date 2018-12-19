@@ -1,5 +1,6 @@
 ﻿using Common;
 using MemoryClock.Commands;
+using MemoryClock.Workers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -23,6 +24,8 @@ namespace MemoryClock
                 CustomRoutedCommand.Raise(this, new AccessGrantedCommand(), null);
             }
             UpdateAccess(true);
+
+            Loaded += (o, e) => ((App)App.Current).StartWorkers();
         }
 
         private void OnCommand(CustomRoutedCommand command, object parameter)
@@ -35,6 +38,7 @@ namespace MemoryClock
 
                 settings.Show();
                 UpdateAccess(false);
+
             }
             else if (command is CloseSettingsCommand)
             {

@@ -150,7 +150,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\RollingAverage.cs" />
-    <Compile Include="Sensors\TimeController.cs" />
     <Compile Include="Settings\BrightnessSettingsControl.xaml.cs">
       <DependentUpon>BrightnessSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -165,6 +164,8 @@
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsPage.cs" />
+    <Compile Include="Workers\TimeSourceWorker.cs" />
+    <Compile Include="Workers\Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

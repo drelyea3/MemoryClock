@@ -7,7 +7,9 @@ namespace MemoryClock.Settings
     {
         public int TickInterval { get; set; } = 100;
 
+        public double MaxLux { get; set; } = 100.0;
         public double NightBrightness { get; set; } = 0.2;
+        public TimeSpan LightSensorInterval { get; set; } = TimeSpan.FromSeconds(2);
 
         public QuarterHourlySchedule<bool> IsDim { get; set; } = new QuarterHourlySchedule<bool>();
         public QuarterHourlySchedule<bool> IsNoPhone { get; set; } = new QuarterHourlySchedule<bool>();

@@ -10,7 +10,16 @@ namespace MemoryClock.Sensors
 {
     public class BrightnessController : DependencyObject
     {
+        public enum SensorState
+        {
+            OK,
+            NotAvailable,
+            Malfunctioning,
+        }
+
         private RollingAverage luxBuffer = new RollingAverage(5);
+
+        public SensorState State { get; private set; }
 
         public double Brightness
         {
@@ -29,13 +38,13 @@ namespace MemoryClock.Sensors
         private void LuxWorker(IAsyncAction operation)
         {
             var sensor = LuxSensor.Create();
-
+            var sensorOK = true;
             if (sensor != null)
             {
-                while (true)
+                while (sensorOK)
                 {
                     double currentLux = sensor.GetLux();
-                    double MaxLux = 100.0;
+                    double MaxLux = Global.Settings.MaxLux;
                     double MinOpacity = Global.Settings.NightBrightness;
 
                     var normalizedLux = Math.Min(1.0, currentLux / MaxLux);
@@ -49,7 +58,7 @@ namespace MemoryClock.Sensors
                     {
                         Brightness = newBrightness;
                     });
-                    Task.Delay(1000).Wait();
+                    Task.Delay((int)Global.Settings.LightSensorInterval.TotalMilliseconds).Wait();
                 }
             }
         }

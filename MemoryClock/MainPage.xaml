@@ -16,11 +16,10 @@
 
     <Page.Resources>
         <sensors:BrightnessController x:Key="brightnessController"/>
-        <sensors:TimeController x:Key="timeController"/>
     </Page.Resources>
 
     <Grid>
-        <Grid Margin="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource burnin}}">
+        <Grid Margin="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource burnin}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="2*"/>
@@ -29,20 +28,20 @@
             </Grid.RowDefinitions>
 
             <Viewbox Stretch="Uniform" Margin="16,0">
-                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='dddd'}"/>
+                <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='dddd'}"/>
             </Viewbox>
 
             <Viewbox Stretch="Uniform" Grid.Row="1">
-                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='t'}" Margin="-2"/>
+                <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='t'}" Margin="-2"/>
             </Viewbox>
 
             <Viewbox Stretch="Uniform" Grid.Row="2">
-                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource timeOfDay}}"/>
+                <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource timeOfDay}}"/>
             </Viewbox>
 
             <Viewbox Stretch="Uniform" Grid.Row="2"  HorizontalAlignment="Left" Margin="16,0">
                 <StackPanel Orientation="Horizontal">
-                    <Grid Visibility="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource noPhone}}">
+                    <Grid Visibility="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource noPhone}}">
                         <SymbolIcon Symbol="Phone"/>
                         <SymbolIcon Symbol="Clear" Foreground="Red"/>
                     </Grid>
@@ -50,7 +49,7 @@
             </Viewbox>
 
             <Viewbox Stretch="Uniform" Grid.Row="3" Margin="16,0">
-                <TextBlock Text="{Binding Source={StaticResource timeController}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='MMMM d, yyyy'}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+                <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='MMMM d, yyyy'}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
             </Viewbox>
 
         </Grid>
@@ -78,7 +77,7 @@
         <controls:TimeSliderControl
             x:Name="testTime" 
             x:Load="False"
-            TimeController="{StaticResource timeController}" 
+            TimeSource="{StaticResource TimeSource}" 
             VerticalAlignment="Top" 
             Margin="16" 
             Visibility="Collapsed"

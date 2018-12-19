@@ -146,6 +146,7 @@ namespace MemoryClock.Sensors
             uint[] Data = GetData();
             uint CH0 = Data[0];
             uint CH1 = Data[1];
+
             //Debug.WriteLine($"CH0 {CH0} CH1 {CH1}");
             double ratio, d0, d1;
             double lux = 0.0;
@@ -156,6 +157,7 @@ namespace MemoryClock.Sensors
                 lux = 0.0;
                 return lux;
             }
+
             // Convert from unsigned integer to floating point
             d0 = CH0; d1 = CH1;
 

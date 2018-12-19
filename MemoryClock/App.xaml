@@ -5,9 +5,13 @@
     xmlns:local="using:MemoryClock"
     xmlns:commands="using:MemoryClock.Commands"
     xmlns:converters="using:MemoryClock.Converters"
+    xmlns:workers="using:MemoryClock.Workers"
     RequestedTheme="Dark"
     >
     <Application.Resources>
+        <!-- Workers -->
+        <workers:TimeSourceWorker x:Key="TimeSource"/>
+        
         <Color x:Key="appForegroundColor">YellowGreen</Color>
         <SolidColorBrush x:Key="appForegroundBrush" Color="{ThemeResource appForegroundColor}"/>
 
