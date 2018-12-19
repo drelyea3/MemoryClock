@@ -53,7 +53,7 @@
             <controls:RadioToggle
                 GroupName="setting" 
                 Background="Transparent" 
-                Tag="brigtness" 
+                Tag="brightnessPage" 
                 Click="OnPageSelected">
 
                 <controls:RadioToggle.Content>
@@ -66,8 +66,10 @@
             <controls:RadioToggle
                 GroupName="setting" 
                 Background="Transparent" 
-                Tag="brightness" 
-                Click="OnPageSelected">
+                Tag="securityPage" 
+                Click="OnPageSelected"
+                IsEnabled="False"
+                >
                 <controls:RadioToggle.Content>
                     <Viewbox>
                         <Grid>
@@ -124,6 +126,7 @@
             >
             <local:MessagesSettingsControl x:Name="messagePage" Visibility="Collapsed"/>
             <local:NoCallSettingsControl x:Name="noCallPage" Visibility="Collapsed"/>
+            <local:BrightnessSettingsControl x:Name="brightnessPage" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -38,8 +38,8 @@ namespace MemoryClock.Sensors
                 while (true)
                 {
                     double currentLux = sensor.GetLux();
-                    const double MaxLux = 100.0;
-                    const double MinOpacity = 0.05;
+                    double MaxLux = 100.0;
+                    double MinOpacity = Global.Settings.NightBrightness;
 
                     var normalizedLux = Math.Min(1.0, currentLux / MaxLux);
 

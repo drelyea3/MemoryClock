@@ -34,7 +34,7 @@ namespace MemoryClock
             this.InitializeComponent();
 
             CustomRoutedCommand.SetHandler(this, OnCommand);
-            if (System.Diagnostics.Debugger.IsAttached)
+            //if (System.Diagnostics.Debugger.IsAttached)
             {
                 CustomRoutedCommand.Raise(this, new AccessGrantedCommand(), null);
             }
