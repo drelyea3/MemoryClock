@@ -1,10 +1,6 @@
-﻿using MemoryClock;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
-using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using Windows.Storage;
 
 namespace Common
