@@ -1,6 +1,5 @@
 ﻿using Common;
 using MemoryClock.Commands;
-using MemoryClock.Workers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

@@ -14,7 +14,6 @@ namespace MemoryClock.Controls
             set { SetValue(BrightnessProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Dimming.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BrightnessProperty =
             DependencyProperty.Register("Brightness", typeof(double), typeof(BrightnessOverlayControl), new PropertyMetadata(0, OnBrightnessChanged));
 
@@ -32,7 +31,6 @@ namespace MemoryClock.Controls
             set { SetValue(DurationProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Duration.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DurationProperty =
             DependencyProperty.Register("Duration", typeof(TimeSpan), typeof(BrightnessOverlayControl), new PropertyMetadata(DEFAULT_DURATION, OnDurationChanged));
 

@@ -1,5 +1,4 @@
-﻿using MemoryClock.Sensors;
-using MemoryClock.Workers;
+﻿using MemoryClock.Workers;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
