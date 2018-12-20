@@ -12,7 +12,7 @@
         <!-- Workers -->
         <workers:TimeSourceWorker x:Key="TimeSource" Interval="0:0:1"/>
         <workers:BrightnessSourceWorker x:Key="BrightnessSource" TimeSource="{StaticResource TimeSource}" Interval="0:0:1"/>
-        <workers:GpioWorker x:Key="PresenceSource" Pin="23" DebounceTimeout="0:0:0.05"/>
+        <workers:GpioWorker x:Key="PresenceSource" Pin="23"/>
         <workers:GpioWorker x:Key="DoorSource" Pin="24" DebounceTimeout="0:0:0.05"/>
 
         <Color x:Key="appForegroundColor">YellowGreen</Color>

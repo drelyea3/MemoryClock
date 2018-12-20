@@ -64,8 +64,10 @@ namespace MemoryClock.Workers
             if (gpioController != null)
             {
                 gpioPin = gpioController.OpenPin(Pin);
+                var initialRead = gpioPin.Read();
                 gpioPin.DebounceTimeout = DebounceTimeout;
-                Update(gpioPin.Read() != GpioPinValue.High);
+                Debug.WriteLine($"Initial read for pin {Pin} is {initialRead}");
+                Update(initialRead == GpioPinValue.High);
                 gpioPin.ValueChanged += OnValueChanged;
             }
         }
@@ -78,6 +80,7 @@ namespace MemoryClock.Workers
             if (gpioPin != null)
             { 
                 gpioPin.ValueChanged -= OnValueChanged;
+                gpioPin.Dispose();
                 gpioPin = null;
             }
         }
@@ -91,7 +94,7 @@ namespace MemoryClock.Workers
         { 
             Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                Debug.WriteLine($"Pin {Pin} Value {Value}");
+                Debug.WriteLine($"Pin {Pin} Value {value}");
                 Value = value;
                 ValueChanged?.Invoke(this, value ? ValueTrue : ValueFalse);
             });
