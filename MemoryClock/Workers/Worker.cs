@@ -10,7 +10,13 @@ using Windows.UI.Xaml;
 
 namespace MemoryClock.Workers
 {
-    public abstract class Worker : DependencyObject
+    public interface IWorker
+    {
+        void Start();
+        void Stop();
+    }
+
+    public abstract class Worker : DependencyObject, IWorker
     {
         private IAsyncInfo AsyncInfo { get; set; }
 

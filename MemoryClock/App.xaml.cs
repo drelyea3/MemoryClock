@@ -95,7 +95,7 @@ namespace MemoryClock
         {
             foreach (var resource in Resources)
             {
-                var worker = resource.Value as Worker;
+                var worker = resource.Value as IWorker;
                 if (worker != null)
                 {
                     Debug.WriteLine($"Starting {resource.Key}");
@@ -108,7 +108,7 @@ namespace MemoryClock
         {
             foreach (var resource in Resources)
             {
-                var worker = resource.Value as Worker;
+                var worker = resource.Value as IWorker;
                 if (worker != null)
                 {
                     Debug.WriteLine($"Stopping {resource.Key}");

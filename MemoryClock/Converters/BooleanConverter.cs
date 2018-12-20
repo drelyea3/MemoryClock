@@ -2,8 +2,8 @@
 {
     class BooleanConverter : OneWayConverter<bool>
     {
-        public string True { get; set; }
-        public string False { get; set; }
+        public object True { get; set; }
+        public object False { get; set; }
 
         protected override object Convert(bool value)
         {

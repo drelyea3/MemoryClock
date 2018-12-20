@@ -9,11 +9,31 @@
     xmlns:sensors="using:MemoryClock.Sensors"
     xmlns:settings="using:MemoryClock.Settings"
     xmlns:common="using:Common"
+    xmlns:converters="using:MemoryClock.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Foreground="{ThemeResource appForegroundBrush}"
     >
-
+    <Page.Resources>
+        <converters:BooleanConverter x:Key="presenceBrush" True="{StaticResource appForegroundBrush}" False="{StaticResource DarkSmoke}"/>
+        <converters:BooleanConverter x:Key="visibleTrue">
+            <converters:BooleanConverter.True>
+                <Visibility>Visible</Visibility>
+            </converters:BooleanConverter.True>
+            <converters:BooleanConverter.False>
+                <Visibility>Collapsed</Visibility>
+            </converters:BooleanConverter.False>
+        </converters:BooleanConverter>
+        <converters:BooleanConverter x:Key="visibleFalse">
+            <converters:BooleanConverter.True>
+                <Visibility>Collapsed</Visibility>
+            </converters:BooleanConverter.True>
+            <converters:BooleanConverter.False>
+                <Visibility>Visible</Visibility>
+            </converters:BooleanConverter.False>
+        </converters:BooleanConverter>    
+    </Page.Resources>
+    
     <Grid>
         <Grid Margin="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource burnin}}">
             <Grid.RowDefinitions>
@@ -49,6 +69,25 @@
                 <TextBlock Text="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource dateTime}, ConverterParameter='MMMM d, yyyy'}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
             </Viewbox>
 
+            <StackPanel x:Name="iconPanel" Height="20" Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.ColumnSpan="999" Grid.RowSpan="999">
+                <Viewbox Width="20" Margin="8,0">
+                    <Grid>
+                        <BitmapIcon 
+                        UriSource="/Assets/opendoor.png" 
+                        Foreground="{StaticResource appForegroundBrush}" 
+                        Visibility="{Binding Source={StaticResource DoorSource}, Path=Value, Converter={StaticResource visibleFalse}}"/>
+                        <BitmapIcon 
+                        UriSource="/Assets/closeddoor.png" 
+                        Foreground="{StaticResource appForegroundBrush}" 
+                        Visibility="{Binding Source={StaticResource DoorSource}, Path=Value, Converter={StaticResource visibleTrue}}"/>
+
+                    </Grid>
+                </Viewbox>
+                <Viewbox Width="20">
+                    <SymbolIcon Symbol="Contact" Foreground="{Binding Source={StaticResource PresenceSource}, Path=Value, Converter={StaticResource presenceBrush}}"/>
+                </Viewbox>
+            </StackPanel>
+
         </Grid>
 
         <Button x:Name="settingsButton" Background="Transparent" Width="50" Height="50" Margin="8" HorizontalAlignment="Left" VerticalAlignment="Bottom"
@@ -57,9 +96,8 @@
                 <SymbolIcon Symbol="Setting" Foreground="{ThemeResource appForegroundBrush}"/>
             </Viewbox>
         </Button>
-
+        
         <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource BrightnessSource}, Path=Brightness}" IsHitTestVisible="False" Duration="0:0:2"/>
-
         
         <settings:SettingsControl
             x:Name="settings" 

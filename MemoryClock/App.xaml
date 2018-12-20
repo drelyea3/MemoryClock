@@ -12,7 +12,9 @@
         <!-- Workers -->
         <workers:TimeSourceWorker x:Key="TimeSource" Interval="0:0:1"/>
         <workers:BrightnessSourceWorker x:Key="BrightnessSource" TimeSource="{StaticResource TimeSource}" Interval="0:0:1"/>
-        
+        <workers:GpioWorker x:Key="PresenceSource" Pin="23" DebounceTimeout="0:0:0.05"/>
+        <workers:GpioWorker x:Key="DoorSource" Pin="24" DebounceTimeout="0:0:0.05"/>
+
         <Color x:Key="appForegroundColor">YellowGreen</Color>
         <SolidColorBrush x:Key="appForegroundBrush" Color="{ThemeResource appForegroundColor}"/>
         <AcrylicBrush x:Key="DarkSmoke" TintColor="Black" TintOpacity=".2" BackgroundSource="Backdrop" FallbackColor="#c0000000"/>
@@ -25,12 +27,14 @@
         <commands:StopTestingCommand x:Key="StopTestingCommand"/>
         <commands:AccessGrantedCommand x:Key="AccessGrantedCommand"/>
         <commands:AccessRevokedCommand x:Key="AccessRevokedCommand"/>
+        
         <!-- Converters -->
         <converters:DateTimeConverter x:Key="dateTime"/>
         <converters:TimeSpanToTimeConverter x:Key="timeSpanTime"/>
         <converters:TimeOfDayConverter x:Key="timeOfDay"/>
         <converters:BurninMarginConverter x:Key="burnin"/>
         <converters:NoPhoneConverter x:Key="noPhone"/>
+        
         <!-- Templates -->
         <DataTemplate x:Key="timeTemplate">
             <TextBlock Foreground="{StaticResource appForegroundBrush}" FontSize="24" Text="{Binding Converter={StaticResource timeSpanTime}, ConverterParameter='t'}"/>
