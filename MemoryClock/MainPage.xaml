@@ -58,7 +58,7 @@
             </Viewbox>
         </Button>
 
-        <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource BrightnessSource}, Path=Brightness}" IsHitTestVisible="False"/>
+        <controls:BrightnessOverlayControl x:Name="brightness" Brightness="{Binding Source={StaticResource BrightnessSource}, Path=Brightness}" IsHitTestVisible="False" Duration="0:0:2"/>
 
         
         <settings:SettingsControl

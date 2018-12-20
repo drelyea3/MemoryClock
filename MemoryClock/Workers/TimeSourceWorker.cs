@@ -26,6 +26,11 @@ namespace MemoryClock.Workers
 
         public event EventHandler<TickEventArgs> Tick;
 
+        public TimeSourceWorker()
+        {
+            Interval = Global.Settings.TickInterval;
+        }
+
         public DateTime Now
         {
             get { return (DateTime)GetValue(NowProperty); }

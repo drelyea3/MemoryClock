@@ -24,17 +24,17 @@ namespace MemoryClock.Controls
             dimmer.overlay.Opacity = 1.0 - dimmer.Brightness;
         }
 
-        const int DEFAULT_DURATION = 5000; // ms
+        static readonly TimeSpan DEFAULT_DURATION = TimeSpan.FromSeconds(1);
 
-        public int Duration
+        public TimeSpan Duration
         {
-            get { return (int)GetValue(DurationProperty); }
+            get { return (TimeSpan)GetValue(DurationProperty); }
             set { SetValue(DurationProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Duration.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DurationProperty =
-            DependencyProperty.Register("Duration", typeof(int), typeof(BrightnessOverlayControl), new PropertyMetadata(DEFAULT_DURATION, OnDurationChanged));
+            DependencyProperty.Register("Duration", typeof(TimeSpan), typeof(BrightnessOverlayControl), new PropertyMetadata(DEFAULT_DURATION, OnDurationChanged));
 
         private static void OnDurationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -49,7 +49,7 @@ namespace MemoryClock.Controls
             InitializeAnimation(Duration);
         }
 
-        private void InitializeAnimation(int duration)
+        private void InitializeAnimation(TimeSpan duration)
         {
             // Initialize implicit animation
             var overlayVisual = ElementCompositionPreview.GetElementVisual(overlay);
@@ -57,7 +57,7 @@ namespace MemoryClock.Controls
             var animation = compositor.CreateScalarKeyFrameAnimation();
             animation.Target = nameof(Visual.Opacity);
             animation.InsertExpressionKeyFrame(1.0f, "this.FinalValue", compositor.CreateLinearEasingFunction());
-            animation.Duration = TimeSpan.FromMilliseconds(Duration);
+            animation.Duration = Duration;
             var animations = compositor.CreateImplicitAnimationCollection();
             animations[animation.Target] = animation;
             overlayVisual.ImplicitAnimations = animations;
