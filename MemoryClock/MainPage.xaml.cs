@@ -35,7 +35,7 @@ namespace MemoryClock
             if (command is OpenSettingsCommand)
             {
                 FindName(nameof(settings));
-
+                Global.PushSettings(Clone.Create(Global.Settings));
                 settings.Show();
                 UpdateAccess(false);
             }

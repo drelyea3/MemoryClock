@@ -1,4 +1,6 @@
 ﻿using Common;
+using MemoryClock.Commands;
+using System;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +14,16 @@ namespace MemoryClock.Settings
         public SettingsControl()
         {
             this.InitializeComponent();
+            CustomRoutedCommand.SetHandler(this, OnCommand);
+        }
+
+        private void OnCommand(CustomRoutedCommand command, object parameter)
+        {
+            if (command is StartTestingCommand)
+            {
+                // Don't mark as handled
+                Save();
+            }
         }
 
         private void OnOKClick(object sender, RoutedEventArgs e)
@@ -47,6 +59,7 @@ namespace MemoryClock.Settings
 
         public void Cancel()
         {
+            Global.PopSettings();
             foreach (var page in host.GetChildren<ISettingsPage>())
             {
                 page.Cancel();
@@ -55,6 +68,7 @@ namespace MemoryClock.Settings
 
         public void Save()
         {
+            // Don't do anything with the setting; just keep them
             foreach (var page in host.GetChildren<ISettingsPage>())
             {
                 page.Save();
