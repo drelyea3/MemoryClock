@@ -57,7 +57,7 @@ namespace MemoryClock.Converters
 
                 var margin = margins.Dequeue();
                 lastMargin = margin;
-                //System.Diagnostics.Debug.WriteLine($"Burnin margin {margin}");
+                //System.Diagnostics.Logger.Log($"Burnin margin {margin}");
                 return margin;
             }
 

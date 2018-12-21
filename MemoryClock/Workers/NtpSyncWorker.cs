@@ -20,7 +20,7 @@ namespace MemoryClock.Workers
             { 
                 var result = task.Result.ToLocalTime();
                 var drift = result - now; // If device clock is slow, will be positive
-                Debug.WriteLine($"NtpSyncWorker return {result} DateTime.Now {now} drift {drift}");
+                Logger.Log($"NtpSyncWorker returned {result} DateTime.Now {now} drift {drift}");
             }
             return true;
         }

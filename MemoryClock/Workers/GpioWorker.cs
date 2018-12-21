@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
+using Common;
 using System;
 using System.Diagnostics;
 using Windows.Devices.Gpio;
@@ -62,7 +63,7 @@ namespace MemoryClock.Workers
                 gpioPin = gpioController.OpenPin(Pin);
                 var initialRead = gpioPin.Read();
                 gpioPin.DebounceTimeout = DebounceTimeout;
-                Debug.WriteLine($"Initial read for pin {Pin} is {initialRead}");
+                Logger.Log($"Initial read for pin {Pin} is {initialRead}");
                 Update(initialRead == GpioPinValue.High);
                 gpioPin.ValueChanged += OnValueChanged;
             }
@@ -90,7 +91,7 @@ namespace MemoryClock.Workers
         { 
             Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                Debug.WriteLine($"Pin {Pin} Value {value}");
+                Logger.Log($"Pin {Pin} Value {value}");
                 Value = value;
                 ValueChanged?.Invoke(this, value ? ValueTrue : ValueFalse);
             });

@@ -1,4 +1,5 @@
-﻿using MemoryClock.Workers;
+﻿using Common;
+using MemoryClock.Workers;
 using System;
 using System.Diagnostics;
 using Windows.ApplicationModel;
@@ -98,7 +99,7 @@ namespace MemoryClock
                 var worker = resource.Value as IWorker;
                 if (worker != null)
                 {
-                    Debug.WriteLine($"Starting {resource.Key}");
+                    Logger.Log($"Starting {resource.Key}");
                     worker.Start();
                 }
             }
@@ -111,7 +112,7 @@ namespace MemoryClock
                 var worker = resource.Value as IWorker;
                 if (worker != null)
                 {
-                    Debug.WriteLine($"Stopping {resource.Key}");
+                    Logger.Log($"Stopping {resource.Key}");
                     worker.Stop();
                 }
             }

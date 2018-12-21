@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
+using Common;
 using MemoryClock.Sensors;
 using System;
 using System.Diagnostics;
@@ -58,7 +59,7 @@ namespace MemoryClock.Workers
                     sensor = LuxSensor.Create();
                     if (sensor == null)
                     {
-                        Debug.WriteLine($"{this.GetType()} Could not create sensor, falling back to schedule");
+                        Logger.Log($"{this.GetType()} Could not create sensor, falling back to schedule");
                         State = SensorState.NotAvailable;
                         Fallback();
                         return false;

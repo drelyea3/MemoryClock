@@ -19,7 +19,7 @@ namespace Common
             if (file != null)
             {
                 string json = FileIO.ReadTextAsync(file).AsTask().Result;
-                Debug.WriteLine(json);
+                Logger.Log(json);
                 result = JsonConvert.DeserializeObject<T>(json);
             }
             else
@@ -60,7 +60,7 @@ namespace Common
             StorageFile file = folder.TryGetItemAsync(fileName).AsTask().Result as StorageFile;
             if (file != null)
             {
-                Debug.WriteLine("Deleting " + file.Name);
+                Logger.Log("Deleting " + file.Name);
                 file.DeleteAsync().AsTask().Wait();
                 return true;
             }
@@ -79,7 +79,7 @@ namespace Common
                 var file = item as StorageFile;
                 if (file != null && file.Name.EndsWith(Suffix) && (filter == null || filter(file.Name)))
                 {
-                    Debug.WriteLine("Deleting " + file.Name);
+                    Logger.Log("Deleting " + file.Name);
                     file.DeleteAsync().AsTask().Wait();
                 }
             }

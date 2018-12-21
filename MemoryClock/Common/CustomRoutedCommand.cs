@@ -164,7 +164,7 @@ namespace Common
 
         public static bool Raise(FrameworkElement element, CustomRoutedCommand command, object parameter)
         {
-            Debug.WriteLine($"Raising {command}");
+            Logger.Log($"Raising {command}");
             command.Handled = false;
 
             if (element != null)
@@ -174,7 +174,7 @@ namespace Common
                     GetHandler(ancestor)?.Invoke(command, parameter);
                     if (command.Handled)
                     {
-                        Debug.WriteLine($"Raise - command {command} was handled");
+                        Logger.Log($"Raise - command {command} was handled");
                         break;
                     }
                 }
@@ -182,12 +182,12 @@ namespace Common
 
             if (!command.Handled)
             {
-                Debug.WriteLine($"Raise - command {command} was not handled, trying Application");
+                Logger.Log($"Raise - command {command} was not handled, trying Application");
                 var sink = Application.Current as ICanRaiseCommand;
                 sink?.GetCommandHandler()?.Invoke(command, parameter);
             }
 
-            Debug.WriteLine($"Raise - command {command} handled = {command.Handled}");
+            Logger.Log($"Raise - command {command} handled = {command.Handled}");
 
             return command.Handled;
         }

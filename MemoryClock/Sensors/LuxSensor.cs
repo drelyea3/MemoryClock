@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Diagnostics;
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
@@ -45,7 +46,7 @@ namespace MemoryClock.Sensors
                 var disTask = DeviceInformation.FindAllAsync(aqs).AsTask();
                 disTask.Wait();
                 var dis = disTask.Result;
-                Debug.WriteLine($"Found {dis.Count} devices");
+                Logger.Log($"Found {dis.Count} devices");
                 if (dis.Count == 0)
                 {
                     // No devices found -- was this run on a PC?
@@ -56,7 +57,7 @@ namespace MemoryClock.Sensors
                 settings.BusSpeed = I2cBusSpeed.FastMode;
                 settings.SharingMode = I2cSharingMode.Shared;
                 var did = dis[0].Id;
-                Debug.WriteLine($"Device {did}");
+                Logger.Log($"Device {did}");
                 var deviceTask = I2cDevice.FromIdAsync(did, settings).AsTask();
                 deviceTask.Wait();
                 result.device = deviceTask.Result;
@@ -154,7 +155,7 @@ namespace MemoryClock.Sensors
             uint CH0 = Data[0];
             uint CH1 = Data[1];
 
-            //Debug.WriteLine($"CH0 {CH0} CH1 {CH1}");
+            //Logger.Log($"CH0 {CH0} CH1 {CH1}");
             double ratio, d0, d1;
             double lux = 0.0;
 

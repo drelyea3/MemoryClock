@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -48,7 +49,7 @@ namespace MemoryClock.Workers
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine($"Worker {this.GetType()} raised an exception {e}");
+                    Logger.Log($"Worker {this.GetType()} raised an exception {e}");
                     operation.Cancel();
                 }
 
