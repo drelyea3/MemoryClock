@@ -14,6 +14,7 @@
         <workers:BrightnessSourceWorker x:Key="BrightnessSource" TimeSource="{StaticResource TimeSource}" Interval="0:0:1"/>
         <workers:GpioWorker x:Key="PresenceSource" Pin="23"/>
         <workers:GpioWorker x:Key="DoorSource" Pin="24" DebounceTimeout="0:0:0.05"/>
+        <workers:NtpSyncWorker x:Key="NtpSyncSource" Interval="0:10:0"/>
 
         <Color x:Key="appForegroundColor">YellowGreen</Color>
         <SolidColorBrush x:Key="appForegroundBrush" Color="{ThemeResource appForegroundColor}"/>

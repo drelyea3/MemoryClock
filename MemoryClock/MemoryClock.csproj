@@ -124,6 +124,7 @@
     <Compile Include="Common\Clone.cs" />
     <Compile Include="Common\CommandQueue.cs" />
     <Compile Include="Common\CustomRoutedCommand.cs" />
+    <Compile Include="Common\NtpClient.cs" />
     <Compile Include="Common\Schedule.cs" />
     <Compile Include="Common\TimeDataSource.cs" />
     <Compile Include="Common\VisualTreeEnumerators.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Settings\SettingsPage.cs" />
     <Compile Include="Workers\BrightnessSourceWorker.cs" />
     <Compile Include="Workers\GpioWorker.cs" />
+    <Compile Include="Workers\NtpSyncWorker.cs" />
     <Compile Include="Workers\TimeSourceWorker.cs" />
     <Compile Include="Workers\Worker.cs" />
   </ItemGroup>
