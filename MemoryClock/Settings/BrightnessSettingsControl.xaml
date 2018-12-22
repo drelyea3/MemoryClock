@@ -118,34 +118,37 @@
                 >
                     <Viewbox>
                         <TextBlock
-                        Text="1:00" 
-                        Foreground="{StaticResource appForegroundBrush}" 
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        FontSize="24"/>
+                            Text="1:00" 
+                            Foreground="{StaticResource appForegroundBrush}" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            FontSize="24"
+                            />
                     </Viewbox>
                     <controls:BrightnessOverlayControl 
-                    x:Name="brightnessOverlay"
-                    Brightness="1.0" 
-                    Duration="1"
-                    />
+                        x:Name="brightnessOverlay"
+                        Brightness="1.0" 
+                        Duration="0:0:0.01"
+                        />
                 </Grid>
                 <Slider 
-                x:Name="brightnessSlider"
-                Minimum="0" 
-                Maximum="100"
-                Foreground="{StaticResource appForegroundBrush}" 
-                IsThumbToolTipEnabled="False"
-                ValueChanged="OnSliderValueChange"
+                    x:Name="brightnessSlider"
+                    Minimum="0" 
+                    Maximum="100"
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    IsThumbToolTipEnabled="False"
+                    ValueChanged="OnSliderValueChange"
             />
                 <TextBlock 
-                Text="Lux sensor" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                FontSize="24"/>
+                    Text="Lux sensor" 
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    FontSize="24"
+                    />
                 <TextBlock 
-                Text="{Binding Source={StaticResource BrightnessSource}, Path=Lux}"
-                Foreground="{StaticResource appForegroundBrush}" 
-                FontSize="24"/>
+                    Text="{Binding Source={StaticResource BrightnessSource}, Path=Lux}"
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    FontSize="24"
+                    />
 
             </StackPanel>
 
