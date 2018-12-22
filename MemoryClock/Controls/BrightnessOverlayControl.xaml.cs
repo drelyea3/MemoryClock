@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -37,28 +38,14 @@ namespace MemoryClock.Controls
         private static void OnDurationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var dimmer = (BrightnessOverlayControl)d;
-            dimmer.InitializeAnimation(dimmer.Duration);
+            dimmer.SetFader(dimmer.Duration);
         }
 
         public BrightnessOverlayControl()
         {
             this.InitializeComponent();
 
-            InitializeAnimation(Duration);
-        }
-
-        private void InitializeAnimation(TimeSpan duration)
-        {
-            // Initialize implicit animation
-            var overlayVisual = ElementCompositionPreview.GetElementVisual(overlay);
-            var compositor = overlayVisual.Compositor;
-            var animation = compositor.CreateScalarKeyFrameAnimation();
-            animation.Target = nameof(Visual.Opacity);
-            animation.InsertExpressionKeyFrame(1.0f, "this.FinalValue", compositor.CreateLinearEasingFunction());
-            animation.Duration = Duration;
-            var animations = compositor.CreateImplicitAnimationCollection();
-            animations[animation.Target] = animation;
-            overlayVisual.ImplicitAnimations = animations;
+            overlay.SetFader(Duration);
         }
     }
 }

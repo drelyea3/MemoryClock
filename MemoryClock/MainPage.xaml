@@ -35,7 +35,7 @@
     </Page.Resources>
     
     <Grid>
-        <Grid Margin="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource burnin}}">
+        <Grid x:Name="display" Margin="{Binding Source={StaticResource TimeSource}, Path=Now, Converter={StaticResource burnin}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="2*"/>

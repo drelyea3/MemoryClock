@@ -1,7 +1,10 @@
 ﻿using Common;
 using MemoryClock.Commands;
+using System;
+using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Hosting;
 
 namespace MemoryClock
 {
@@ -25,6 +28,8 @@ namespace MemoryClock
             UpdateAccess(true);
 
             Loaded += (o, e) => ((App)App.Current).StartWorkers();
+
+            display.SetMover(TimeSpan.FromSeconds(2));
         }
 
         private void OnCommand(CustomRoutedCommand command, object parameter)
