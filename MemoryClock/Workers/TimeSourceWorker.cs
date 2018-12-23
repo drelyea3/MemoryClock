@@ -34,6 +34,15 @@ namespace MemoryClock.Workers
         public static readonly DependencyProperty NowProperty =
             DependencyProperty.Register("Now", typeof(DateTime), typeof(TimeSourceWorker), new PropertyMetadata(DateTime.Now));
 
+        public TimeSpan Adjustment
+        {
+            get { return (TimeSpan)GetValue(AdjustmentProperty); }
+            set { SetValue(AdjustmentProperty, value); }
+        }
+
+        public static readonly DependencyProperty AdjustmentProperty =
+            DependencyProperty.Register("Adjustment", typeof(TimeSpan), typeof(TimeSourceWorker), new PropertyMetadata(TimeSpan.Zero));
+
         protected override bool DoWork()
         {
             Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
@@ -45,7 +54,7 @@ namespace MemoryClock.Workers
 
         public void Update(DateTime now)
         {
-            Now = now;
+            Now = now + Adjustment;
             Tick?.Invoke(this, eventArgs.Set(Now));
         }
     }
