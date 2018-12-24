@@ -73,8 +73,24 @@
                         </Viewbox>
                     </controls:RadioToggle.Content>
                 </controls:RadioToggle>
-
+            
                 <controls:RadioToggle
+                    GroupName="setting" 
+                    Background="Transparent" 
+                    Tag="configPage" 
+                    Click="OnPageSelected"
+                    Height="80"
+                    >
+                    <controls:RadioToggle.Content>
+                        <Viewbox>
+                            <Grid>
+                                <SymbolIcon Symbol="Setting" Foreground="{StaticResource appForegroundBrush}"/>
+                            </Grid>
+                        </Viewbox>
+                    </controls:RadioToggle.Content>
+                </controls:RadioToggle>
+
+            <controls:RadioToggle
                     GroupName="setting" 
                     Background="Transparent" 
                     Tag="securityPage" 
@@ -92,6 +108,7 @@
                 </controls:RadioToggle>
             </StackPanel>
         </ScrollViewer>
+        
         <StackPanel 
             Orientation="Horizontal" 
             Grid.Row="1" 
@@ -135,9 +152,10 @@
             CornerRadius="8" Margin="0,-8,-8,0"
             Background="{StaticResource DarkSmoke}"
             >
-            <local:MessagesSettingsControl x:Name="messagePage" Visibility="Collapsed"/>
-            <local:NoCallSettingsControl x:Name="noCallPage" Visibility="Collapsed"/>
-            <local:BrightnessSettingsControl x:Name="brightnessPage" Visibility="Collapsed"/>
+            <local:MessagesSettingsControl x:Name="messagePage" Visibility="Collapsed" x:Load="False"/>
+            <local:NoCallSettingsControl x:Name="noCallPage" Visibility="Collapsed" x:Load="False"/>
+            <local:BrightnessSettingsControl x:Name="brightnessPage" Visibility="Collapsed" x:Load="False"/>
+            <local:ConfigurationControl x:Name="configPage" Visibility="Collapsed" x:Load="False"/>
         </Grid>
     </Grid>
 </UserControl>

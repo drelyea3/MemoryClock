@@ -156,6 +156,9 @@
     <Compile Include="Settings\BrightnessSettingsControl.xaml.cs">
       <DependentUpon>BrightnessSettingsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\ConfigurationControl.xaml.cs">
+      <DependentUpon>ConfigurationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\NoCallSettingsControl.xaml.cs">
       <DependentUpon>NoCallSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Settings\BrightnessSettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\ConfigurationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

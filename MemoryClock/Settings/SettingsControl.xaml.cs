@@ -77,18 +77,10 @@ namespace MemoryClock.Settings
         private void OnPageSelected(object sender, RoutedEventArgs e)
         {
             var element = (FrameworkElement)sender;
-
             selectedPage?.Hide();
-
-            foreach (FrameworkElement page in host.GetChildren())
-            {
-                if (page.Name == element.Tag.ToString())
-                {
-                    selectedPage = (ISettingsPage)page;
-                    selectedPage.Show();
-                    break;
-                }
-            }
+            // This will find the page and cause it to be loaded if x:Load==false
+            selectedPage = host.FindName(element.Tag.ToString()) as ISettingsPage;
+            selectedPage?.Show();
         }
     }
 }
