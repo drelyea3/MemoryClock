@@ -10,7 +10,7 @@
     >
     <Application.Resources>
         <!-- Workers -->
-        <workers:NtpSyncWorker x:Key="NtpSyncSource" Interval="1:00:0"/>
+        <workers:NtpSyncWorker x:Key="NtpSyncSource" Interval="0:15:0"/>
         <workers:TimeSourceWorker x:Key="TimeSource" Interval="0:0:1" Adjustment="{Binding Source={StaticResource NtpSyncSource}, Path=Drift}"/>
         <workers:BrightnessSourceWorker x:Key="BrightnessSource" TimeSource="{StaticResource TimeSource}" Interval="0:0:1"/>
         <workers:GpioWorker x:Key="PresenceSource" Pin="23"/>

@@ -2,6 +2,7 @@
 
 using Common;
 using System;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
 namespace MemoryClock.Workers
@@ -22,14 +23,34 @@ namespace MemoryClock.Workers
         protected override bool DoWork()
         {
             var now = DateTime.Now;
-            var task = client.GetNetworkTimeAsync();
-            task.Wait();
-            if (task.IsCompletedSuccessfully)
+            try
             {
-                var result = task.Result.ToLocalTime();
-                var drift = result - now; // If device clock is slow, will be positive
-                Update(drift);
-                Logger.Log($"NtpSyncWorker returned {result} DateTime.Now {now} drift {drift}");
+                var task = client.GetNetworkTimeAsync();
+                task.Wait();
+                if (task.IsCompletedSuccessfully)
+                {
+                    var result = task.Result.ToLocalTime();
+                    if (result.Year < 2018)
+                    {
+                        // ignore
+                        return true;
+                    }
+                    var drift = result - now; // If device clock is slow, will be positive
+                    Update(drift);
+                    Logger.Log($"NtpSyncWorker returned {result} DateTime.Now {now} drift {drift}");
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException is TaskCanceledException)
+                {
+                    // This occurs if the NTP request times out
+                    return true;
+                }
+                else
+                {
+                    throw;
+                }
             }
             return true;
         }

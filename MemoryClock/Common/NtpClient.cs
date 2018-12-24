@@ -41,7 +41,7 @@ namespace Common
 
                 //The UDP port number assigned to NTP is 123
                 await socket.ConnectAsync(new HostName("pool.ntp.org"), "123");
-                
+
                 using (var writer = new DataWriter(socket.OutputStream))
                 {
                     // NTP message size is 16 bytes of the digest (RFC 2030)
