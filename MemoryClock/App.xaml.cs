@@ -1,7 +1,7 @@
 ﻿using Common;
 using MemoryClock.Workers;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -94,27 +94,42 @@ namespace MemoryClock
 
         public void StartWorkers()
         {
-            foreach (var resource in Resources)
+            foreach (var worker in GetWorkers())
             {
-                var worker = resource.Value as IWorker;
-                if (worker != null)
+                if (worker.Item2.IsEnabled || worker.Item2.IsAlwaysEnabled)
                 {
-                    Logger.Log($"Starting {resource.Key}");
-                    worker.Start();
+                    Logger.Log($"Starting {worker.Item1}");
+                    worker.Item2.Start();
                 }
             }
         }
 
         public void StopWorkers()
         {
+            foreach (var worker in GetWorkers())
+            {
+                Logger.Log($"Stopping {worker.Item1}");
+                worker.Item2.Stop();
+            }
+        }
+
+        public IEnumerable<Tuple<string, IWorker>> GetWorkers()
+        {
             foreach (var resource in Resources)
             {
                 var worker = resource.Value as IWorker;
                 if (worker != null)
                 {
-                    Logger.Log($"Stopping {resource.Key}");
-                    worker.Stop();
+                    yield return new Tuple<string, IWorker>((string)resource.Key, worker);
                 }
+            }
+        }
+
+        public void EnableWorkers(List<string> enabledWorkers)
+        {
+            foreach (var worker in GetWorkers())
+            {
+                worker.Item2.IsEnabled = enabledWorkers.Contains(worker.Item1);
             }
         }
     }

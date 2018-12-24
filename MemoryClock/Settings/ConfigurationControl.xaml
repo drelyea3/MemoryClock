@@ -8,8 +8,82 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
+    <UserControl.Resources>
+        <DataTemplate x:Key="workerTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Orientation="Horizontal">
+                    <Image 
+                        Width="32" 
+                        Height="32" 
+                        Margin="0,4,4,4"
+                        Source="/Assets/RPi.png"
+                        Visibility="{Binding IsRaspberryPiOnly}"
+                        />
+                    <TextBlock
+                        Text="{Binding Name}"
+                        Foreground="{StaticResource appForegroundBrush}" 
+                        FontSize="24"
+                        VerticalAlignment="Center"
+                        />
+                </StackPanel>
 
+                <ToggleSwitch 
+                    Grid.Column="1" 
+                    IsOn="{Binding IsEnabled, Mode=TwoWay}" 
+                    IsEnabled="{Binding AllowDisable}"
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    FontSize="24"
+                    MinWidth="0"
+                    />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock 
+                Text="Configuration" 
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24"
+            />
+        <ListView x:Name="workers" 
+            Grid.Row="1" 
+            ItemTemplate="{StaticResource workerTemplate}"
+            Background="{StaticResource LightSmoke}" 
+            Margin="0,0,16,0" 
+            Foreground="{StaticResource appForegroundBrush}"                   
+            SelectionChanged="OnSelectionChanged"
+            >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
+        <StackPanel
+            Grid.Row="2"
+            Orientation="Horizontal" 
+            Margin="0,8,0,0">
+            <Button
+                Content="Set PC Defaults"
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24"
+                />
+            <Button
+                Content="Set Raspberry Pi Defaults"
+                Margin="8,0"
+                Foreground="{StaticResource appForegroundBrush}" 
+                FontSize="24"
+                />
+        </StackPanel>
     </Grid>
 </UserControl>

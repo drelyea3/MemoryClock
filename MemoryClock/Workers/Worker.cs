@@ -1,6 +1,5 @@
 ﻿using Common;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System.Threading;
@@ -12,15 +11,21 @@ namespace MemoryClock.Workers
     {
         void Start();
         void Stop();
+
+        bool IsEnabled { get; set; }
+        bool IsAlwaysEnabled { get; }
+        bool IsRaspberryPiOnly { get; }
     }
 
     public abstract class Worker : DependencyObject, IWorker
     {
         private IAsyncInfo AsyncInfo { get; set; }
 
+        public Worker() { }
+
         public void Start()
         {
-            if (AsyncInfo == null || AsyncInfo.Status != AsyncStatus.Started)
+            if (IsEnabled && (AsyncInfo == null || AsyncInfo.Status != AsyncStatus.Started))
             {
                 AsyncInfo = ThreadPool.RunAsync(DoWork);
             }
@@ -30,6 +35,10 @@ namespace MemoryClock.Workers
         {
             AsyncInfo?.Cancel();
         }
+
+        public bool IsEnabled { get; set; } = true;
+        public bool IsAlwaysEnabled { get; protected set; } = false;
+        public bool IsRaspberryPiOnly { get; protected set; } = false;
 
         public TimeSpan Interval { get; set; } = TimeSpan.FromSeconds(1);
 

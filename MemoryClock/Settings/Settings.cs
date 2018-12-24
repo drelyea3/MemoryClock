@@ -1,10 +1,14 @@
 ﻿using Common;
 using System;
+using System.Collections.Generic;
+using Windows.UI.Xaml;
 
 namespace MemoryClock.Settings
 {
     public class Settings
     {
+        public List<string> EnabledWorkers = new List<string>();
+
         public TimeSpan TickInterval { get; set; } = TimeSpan.FromMilliseconds(500);
 
         public double MaxLux { get; set; } = 50.0;
@@ -41,6 +45,15 @@ namespace MemoryClock.Settings
                 new Event<string>(new TimeSpan(18,0,0), "Evening"),
                 new Event<string>(new TimeSpan(20,0,0), "Night - time to sleep"),
             };
+
+            EnabledWorkers.Clear();
+            foreach (var worker in ((App)App.Current).GetWorkers())
+            {
+                if (worker.Item2.IsAlwaysEnabled || !worker.Item2.IsRaspberryPiOnly)
+                {
+                    EnabledWorkers.Add(worker.Item1);
+                }
+            }
         }
     }
 }

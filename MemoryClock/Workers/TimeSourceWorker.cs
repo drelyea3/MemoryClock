@@ -24,6 +24,7 @@ namespace MemoryClock.Workers
         public TimeSourceWorker()
         {
             Interval = Global.Settings.TickInterval;
+            IsAlwaysEnabled = true;
         }
 
         public DateTime Now

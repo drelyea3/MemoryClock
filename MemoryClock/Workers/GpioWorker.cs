@@ -2,13 +2,12 @@
 
 using Common;
 using System;
-using System.Diagnostics;
 using Windows.Devices.Gpio;
 using Windows.UI.Xaml;
 
 namespace MemoryClock.Workers
 {
-    public class GpioWorker: DependencyObject, IWorker
+    public class GpioWorker : DependencyObject, IWorker
     {
         public class ValueChangedEventArgs
         {
@@ -17,7 +16,7 @@ namespace MemoryClock.Workers
                 Value = value;
             }
 
-            public bool Value { get; private set;}
+            public bool Value { get; private set; }
         }
 
         private static readonly ValueChangedEventArgs ValueTrue = new ValueChangedEventArgs(true);
@@ -28,7 +27,7 @@ namespace MemoryClock.Workers
             get { return (bool)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
-        
+
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(bool), typeof(GpioWorker), new PropertyMetadata(false));
 
@@ -57,15 +56,18 @@ namespace MemoryClock.Workers
 
         public void Start()
         {
-            gpioController = GpioController.GetDefault();
-            if (gpioController != null)
+            if (IsEnabled)
             {
-                gpioPin = gpioController.OpenPin(Pin);
-                var initialRead = gpioPin.Read();
-                gpioPin.DebounceTimeout = DebounceTimeout;
-                Logger.Log($"Initial read for pin {Pin} is {initialRead}");
-                Update(initialRead == GpioPinValue.High);
-                gpioPin.ValueChanged += OnValueChanged;
+                gpioController = GpioController.GetDefault();
+                if (gpioController != null)
+                {
+                    gpioPin = gpioController.OpenPin(Pin);
+                    var initialRead = gpioPin.Read();
+                    gpioPin.DebounceTimeout = DebounceTimeout;
+                    Logger.Log($"Initial read for pin {Pin} is {initialRead}");
+                    Update(initialRead == GpioPinValue.High);
+                    gpioPin.ValueChanged += OnValueChanged;
+                }
             }
         }
 
@@ -75,12 +77,16 @@ namespace MemoryClock.Workers
 
             gpioController = null;
             if (gpioPin != null)
-            { 
+            {
                 gpioPin.ValueChanged -= OnValueChanged;
                 gpioPin.Dispose();
                 gpioPin = null;
             }
         }
+
+        public bool IsEnabled { get; set; } = true;
+        public bool IsAlwaysEnabled { get; } = false;
+        public bool IsRaspberryPiOnly { get; } = true;
 
         private void OnValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
         {
@@ -88,7 +94,7 @@ namespace MemoryClock.Workers
         }
 
         public void Update(bool value)
-        { 
+        {
             Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 Logger.Log($"Pin {Pin} Value {value}");

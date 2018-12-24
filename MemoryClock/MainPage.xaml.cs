@@ -15,7 +15,7 @@ namespace MemoryClock
 
         public MainPage()
         {
-            //Global.DeleteSettings();
+            Global.DeleteSettings();
             Global.Initialize();
 
             this.InitializeComponent();
