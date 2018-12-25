@@ -21,6 +21,15 @@ namespace MemoryClock.Workers
     {
         private IAsyncInfo AsyncInfo { get; set; }
 
+        public bool IsEnabled
+        {
+            get { return (bool)GetValue(IsEnabledProperty); }
+            set { SetValue(IsEnabledProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsEnabledProperty =
+            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(Worker), new PropertyMetadata(false));
+
         public Worker() { }
 
         public void Start()
@@ -36,7 +45,6 @@ namespace MemoryClock.Workers
             AsyncInfo?.Cancel();
         }
 
-        public bool IsEnabled { get; set; } = true;
         public bool IsAlwaysEnabled { get; protected set; } = false;
         public bool IsRaspberryPiOnly { get; protected set; } = false;
 

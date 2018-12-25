@@ -9,18 +9,8 @@ namespace MemoryClock.Workers
 {
     public class GpioWorker : DependencyObject, IWorker
     {
-        public class ValueChangedEventArgs
-        {
-            public ValueChangedEventArgs(bool value)
-            {
-                Value = value;
-            }
-
-            public bool Value { get; private set; }
-        }
-
-        private static readonly ValueChangedEventArgs ValueTrue = new ValueChangedEventArgs(true);
-        private static readonly ValueChangedEventArgs ValueFalse = new ValueChangedEventArgs(false);
+        GpioController gpioController;
+        GpioPin gpioPin;
 
         public bool Value
         {
@@ -30,6 +20,15 @@ namespace MemoryClock.Workers
 
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(bool), typeof(GpioWorker), new PropertyMetadata(false));
+
+        public bool NotValue
+        {
+            get { return (bool)GetValue(NotValueProperty); }
+            set { SetValue(NotValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty NotValueProperty =
+            DependencyProperty.Register("NotValue", typeof(bool), typeof(GpioWorker), new PropertyMetadata(true));
 
         public int Pin
         {
@@ -49,10 +48,15 @@ namespace MemoryClock.Workers
         public static readonly DependencyProperty DebounceTimeoutProperty =
             DependencyProperty.Register("DebounceTimeout", typeof(TimeSpan), typeof(GpioWorker), new PropertyMetadata(TimeSpan.Zero));
 
-        GpioController gpioController;
-        GpioPin gpioPin;
+        public bool IsEnabled
+        {
+            get { return (bool)GetValue(IsEnabledProperty); }
+            set { SetValue(IsEnabledProperty, value); }
+        }
 
-        public event EventHandler<ValueChangedEventArgs> ValueChanged;
+        public static readonly DependencyProperty IsEnabledProperty =
+            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(GpioWorker), new PropertyMetadata(false));
+
 
         public void Start()
         {
@@ -84,7 +88,6 @@ namespace MemoryClock.Workers
             }
         }
 
-        public bool IsEnabled { get; set; } = true;
         public bool IsAlwaysEnabled { get; } = false;
         public bool IsRaspberryPiOnly { get; } = true;
 
@@ -99,7 +102,7 @@ namespace MemoryClock.Workers
             {
                 Logger.Log($"Pin {Pin} Value {value}");
                 Value = value;
-                ValueChanged?.Invoke(this, value ? ValueTrue : ValueFalse);
+                NotValue = !value;
             });
         }
     }

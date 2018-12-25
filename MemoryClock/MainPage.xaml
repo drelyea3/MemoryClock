@@ -16,22 +16,6 @@
     >
     <Page.Resources>
         <converters:BooleanConverter x:Key="presenceBrush" True="{StaticResource appForegroundBrush}" False="{StaticResource DarkSmoke}"/>
-        <converters:BooleanConverter x:Key="visibleTrue">
-            <converters:BooleanConverter.True>
-                <Visibility>Visible</Visibility>
-            </converters:BooleanConverter.True>
-            <converters:BooleanConverter.False>
-                <Visibility>Collapsed</Visibility>
-            </converters:BooleanConverter.False>
-        </converters:BooleanConverter>
-        <converters:BooleanConverter x:Key="visibleFalse">
-            <converters:BooleanConverter.True>
-                <Visibility>Collapsed</Visibility>
-            </converters:BooleanConverter.True>
-            <converters:BooleanConverter.False>
-                <Visibility>Visible</Visibility>
-            </converters:BooleanConverter.False>
-        </converters:BooleanConverter>    
     </Page.Resources>
     
     <Grid>
@@ -71,20 +55,23 @@
 
             <StackPanel x:Name="iconPanel" Height="20" Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.ColumnSpan="999" Grid.RowSpan="999">
                 <Viewbox Width="20" Margin="8,0">
-                    <Grid>
+                    <Grid Visibility="{Binding Source={StaticResource DoorSource}, Path=IsEnabled}">
                         <BitmapIcon 
-                        UriSource="/Assets/opendoor.png" 
-                        Foreground="{StaticResource appForegroundBrush}" 
-                        Visibility="{Binding Source={StaticResource DoorSource}, Path=Value, Converter={StaticResource visibleFalse}}"/>
+                            UriSource="/Assets/opendoor.png" 
+                            Foreground="{StaticResource appForegroundBrush}" 
+                            Visibility="{Binding Source={StaticResource DoorSource}, Path=NotValue}"/>
                         <BitmapIcon 
-                        UriSource="/Assets/closeddoor.png" 
-                        Foreground="{StaticResource appForegroundBrush}" 
-                        Visibility="{Binding Source={StaticResource DoorSource}, Path=Value, Converter={StaticResource visibleTrue}}"/>
+                            UriSource="/Assets/closeddoor.png" 
+                            Foreground="{StaticResource appForegroundBrush}" 
+                            Visibility="{Binding Source={StaticResource DoorSource}, Path=Value}"/>
 
                     </Grid>
                 </Viewbox>
                 <Viewbox Width="20">
-                    <SymbolIcon Symbol="Contact" Foreground="{Binding Source={StaticResource PresenceSource}, Path=Value, Converter={StaticResource presenceBrush}}"/>
+                    <SymbolIcon 
+                        Symbol="Contact"
+                        Visibility="{Binding Source={StaticResource PresenceSource}, Path=IsAlwaysEnabled}"
+                        Foreground="{Binding Source={StaticResource PresenceSource}, Path=Value, Converter={StaticResource presenceBrush}}"/>
                 </Viewbox>
             </StackPanel>
 
