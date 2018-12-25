@@ -27,7 +27,8 @@ namespace MemoryClock.Settings
 
         private void OnOKClick(object sender, RoutedEventArgs e)
         {
-            Save();
+            Save();            
+            Global.SaveSettings();
         }
 
         private void OnCancelClick(object sender, RoutedEventArgs e)
@@ -66,7 +67,7 @@ namespace MemoryClock.Settings
         }
 
         public void Save()
-        {
+        {   
             // Don't do anything with the setting; just keep them
             foreach (var page in host.GetChildren<ISettingsPage>())
             {

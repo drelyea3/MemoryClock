@@ -85,7 +85,7 @@ namespace MemoryClock.Workers
                 return true;
             }
 
-            sensor.Dispose();
+            sensor?.Dispose();
             sensor = null;
 
             Fallback();           
