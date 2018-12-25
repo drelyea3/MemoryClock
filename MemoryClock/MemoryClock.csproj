@@ -146,7 +146,6 @@
     <Compile Include="Converters\TimeOfDayConverter.cs" />
     <Compile Include="Converters\TimeSpanToTimeConverter.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="Sensors\BrightnessController.cs" />
     <Compile Include="Sensors\LuxSensor.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -184,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\closeddoor.png" />
+    <Content Include="Assets\MemoryClock_bb.png" />
     <Content Include="Assets\opendoor.png" />
     <Content Include="Assets\RPi.png" />
     <Content Include="Properties\Default.rd.xml" />

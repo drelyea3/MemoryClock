@@ -6,7 +6,7 @@ using Windows.Devices.I2c;
 
 namespace MemoryClock.Sensors
 {
-    public class LuxSensor
+    public class LuxSensor : IDisposable
     {
         public enum Sensitivity
         {
@@ -197,6 +197,10 @@ namespace MemoryClock.Sensors
 
             return Math.Round(lux, 2);
         }
-    }
 
+        public void Dispose()
+        {
+            device.Dispose();
+        }
+    }
 }

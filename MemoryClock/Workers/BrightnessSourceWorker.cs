@@ -62,6 +62,8 @@ namespace MemoryClock.Workers
                         Logger.Log($"{this.GetType()} Could not create sensor, falling back to schedule");
                         State = SensorState.NotAvailable;
                         Fallback();
+                        sensor.Dispose();
+                        sensor = null;
                         return false;
                     }
                 }
@@ -85,7 +87,10 @@ namespace MemoryClock.Workers
                 return true;
             }
 
-            Fallback();
+            sensor.Dispose();
+            sensor = null;
+
+            Fallback();           
             return false;
         }
 

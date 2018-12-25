@@ -18,8 +18,10 @@
 
         <Color x:Key="appForegroundColor">YellowGreen</Color>
         <SolidColorBrush x:Key="appForegroundBrush" Color="{ThemeResource appForegroundColor}"/>
-        <AcrylicBrush x:Key="DarkSmoke" TintColor="Black" TintOpacity=".2" BackgroundSource="Backdrop" FallbackColor="#c0000000"/>
-        <AcrylicBrush x:Key="LightSmoke" TintColor="White" TintOpacity=".05" BackgroundSource="Backdrop" FallbackColor="#40ffffff"/>
+        <!--<AcrylicBrush x:Key="DarkSmoke" TintColor="Black" TintOpacity=".2" BackgroundSource="Backdrop" FallbackColor="#c0000000"/>
+        <AcrylicBrush x:Key="LightSmoke" TintColor="White" TintOpacity=".05" BackgroundSource="Backdrop" FallbackColor="#40ffffff"/>-->
+        <SolidColorBrush x:Key="DarkSmoke" Color="#c0000000"/>
+        <SolidColorBrush x:Key="LightSmoke" Color="#40ffffff"/>
 
         <commands:OpenSettingsCommand x:Key="OpenSettingsCommand"/>
         <commands:SaveSettingsCommand x:Key="SaveSettingsCommand"/>

@@ -1,10 +1,9 @@
 ﻿using Common;
 using MemoryClock.Commands;
 using System;
-using Windows.UI.Composition;
+using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Hosting;
 
 namespace MemoryClock
 {
@@ -15,7 +14,7 @@ namespace MemoryClock
 
         public MainPage()
         {
-            Global.DeleteSettings();
+            //Global.DeleteSettings();
             Global.Initialize();
 
             this.InitializeComponent();
@@ -30,6 +29,14 @@ namespace MemoryClock
             Loaded += (o, e) => ((App)App.Current).StartWorkers();
 
             display.SetMover(TimeSpan.FromSeconds(2));
+
+            // get the device manufacturer and model name
+            EasClientDeviceInformation eas = new EasClientDeviceInformation();
+            var DeviceManufacturer = eas.SystemManufacturer;
+            var DeviceModel = eas.SystemProductName;
+            var SKU = eas.SystemSku;
+
+            System.Diagnostics.Debug.WriteLine($"SKU {SKU} Manu {DeviceManufacturer} Model {DeviceModel}");
         }
 
         private void OnCommand(CustomRoutedCommand command, object parameter)
@@ -87,7 +94,7 @@ namespace MemoryClock
         private void UpdateAccess(bool isDesired)
         {
             IsAccessGranted = isDesired && IsAccessAllowed;
-            settingsButton.Visibility =  IsAccessGranted ? Visibility.Visible : Visibility.Collapsed;
+            settingsButton.Visibility = IsAccessGranted ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
