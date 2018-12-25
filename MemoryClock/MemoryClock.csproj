@@ -171,6 +171,7 @@
     <Compile Include="Settings\SettingsPage.cs" />
     <Compile Include="Workers\BrightnessSourceWorker.cs" />
     <Compile Include="Workers\GpioWorker.cs" />
+    <Compile Include="Workers\LuxWorker.cs" />
     <Compile Include="Workers\NtpSyncWorker.cs" />
     <Compile Include="Workers\TimeSourceWorker.cs" />
     <Compile Include="Workers\Worker.cs" />

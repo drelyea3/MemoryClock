@@ -90,8 +90,17 @@
 
         </Grid>
 
-        <Button x:Name="settingsButton" Background="Transparent" Width="50" Height="50" Margin="8" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                 common:CustomRoutedCommand.Command="{StaticResource OpenSettingsCommand}">
+        <Button 
+            x:Name="settingsButton" 
+            Background="Transparent" 
+            Opacity=".5"
+            Width="50" 
+            Height="50" 
+            Margin="8" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Bottom"
+            common:CustomRoutedCommand.Command="{StaticResource OpenSettingsCommand}"
+            >
             <Viewbox>
                 <SymbolIcon Symbol="Setting" Foreground="{ThemeResource appForegroundBrush}"/>
             </Viewbox>

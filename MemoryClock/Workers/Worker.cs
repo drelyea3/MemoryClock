@@ -42,10 +42,14 @@ namespace MemoryClock.Workers
 
         public TimeSpan Interval { get; set; } = TimeSpan.FromSeconds(1);
 
+        protected virtual void Setup() { }
         protected abstract bool DoWork();
+        protected virtual void TearDown() { }
 
         private void DoWork(IAsyncAction operation)
         {
+            Setup();
+
             while (operation.Status == AsyncStatus.Started)
             {
                 try
@@ -64,6 +68,8 @@ namespace MemoryClock.Workers
 
                 Task.Delay((int)Interval.TotalMilliseconds).Wait();
             }
+
+            TearDown();
         }
     }
 }

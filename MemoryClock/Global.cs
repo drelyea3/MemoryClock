@@ -33,6 +33,13 @@ namespace MemoryClock
                 ResetSettings();
             }
 
+            foreach (var pair in ((App)App.Current).GetWorkers())
+            {
+                var key = pair.Item1;
+                var worker = pair.Item2;
+                worker.IsEnabled = worker.IsAlwaysEnabled || Settings.EnabledWorkers.Contains(key);
+            }
+
             // Machine-specific initialization
             // get the device manufacturer and model name
             var eas = new EasClientDeviceInformation();
