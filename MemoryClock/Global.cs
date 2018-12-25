@@ -2,6 +2,8 @@
 
 using Common;
 using System;
+using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.UI.Xaml.Media;
 
 namespace MemoryClock
 {
@@ -30,6 +32,22 @@ namespace MemoryClock
             {
                 ResetSettings();
             }
+
+            // Machine-specific initialization
+            // get the device manufacturer and model name
+            var eas = new EasClientDeviceInformation();
+            var DeviceManufacturer = eas.SystemManufacturer;
+            var DeviceModel = eas.SystemProductName;
+            var SKU = eas.SystemSku;
+            var result = string.CompareOrdinal(SKU,"RPi3");
+            if (SKU.StartsWith("RPi") && string.CompareOrdinal(SKU,"RPi3") < 0)
+            {
+                // Raspberry Pi2 devices can't handle AcrylicBrush effects, so force fallback
+                ((AcrylicBrush)App.Current.Resources["DarkSmoke"]).AlwaysUseFallback = true;
+                ((AcrylicBrush)App.Current.Resources["LightSmoke"]).AlwaysUseFallback = true;
+            }
+
+            Logger.Log($"SKU {SKU} Manu {DeviceManufacturer} Model {DeviceModel}");
         }
 
         private static void InitializeOffthread()

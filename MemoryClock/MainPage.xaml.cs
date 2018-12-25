@@ -29,14 +29,6 @@ namespace MemoryClock
             Loaded += (o, e) => ((App)App.Current).StartWorkers();
 
             display.SetMover(TimeSpan.FromSeconds(2));
-
-            // get the device manufacturer and model name
-            EasClientDeviceInformation eas = new EasClientDeviceInformation();
-            var DeviceManufacturer = eas.SystemManufacturer;
-            var DeviceModel = eas.SystemProductName;
-            var SKU = eas.SystemSku;
-
-            System.Diagnostics.Debug.WriteLine($"SKU {SKU} Manu {DeviceManufacturer} Model {DeviceModel}");
         }
 
         private void OnCommand(CustomRoutedCommand command, object parameter)
