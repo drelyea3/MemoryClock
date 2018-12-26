@@ -1,6 +1,5 @@
 ﻿using Common;
 using System;
-using System.Diagnostics;
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
 

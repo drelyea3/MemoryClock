@@ -1,17 +1,12 @@
 ﻿#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
-using Common;
-using MemoryClock.Sensors;
 using System;
-using System.Diagnostics;
 using Windows.UI.Xaml;
 
 namespace MemoryClock.Workers
 {
     public class BrightnessSourceWorker : Worker
     {
-        private RollingAverage luxBuffer;
-
         public double Brightness
         {
             get { return (double)GetValue(BrightnessProperty); }
@@ -28,7 +23,7 @@ namespace MemoryClock.Workers
         }
 
         public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.Register("Time", typeof(DateTime), typeof(BrightnessSourceWorker), new PropertyMetadata(DateTime.MinValue, (o,e) => ((BrightnessSourceWorker)o).OnTimeChanged((DateTime)e.NewValue)));
+            DependencyProperty.Register("Time", typeof(DateTime), typeof(BrightnessSourceWorker), new PropertyMetadata(DateTime.MinValue, (o, e) => ((BrightnessSourceWorker)o).OnTimeChanged((DateTime)e.NewValue)));
 
         private void OnTimeChanged(DateTime newValue)
         {
@@ -36,7 +31,7 @@ namespace MemoryClock.Workers
             {
                 var isDim = Global.Settings.IsDim.GetValue(Time.TimeOfDay);
                 var brightness = isDim ? Global.Settings.NightBrightness : Global.Settings.DayBrightness;
-                Update(brightness, LuxWorker.INVALID_LUX);
+                Update(brightness);
             }
         }
 
@@ -47,31 +42,15 @@ namespace MemoryClock.Workers
         }
 
         public static readonly DependencyProperty LuxProperty =
-            DependencyProperty.Register("Lux", typeof(double), typeof(BrightnessSourceWorker), new PropertyMetadata(0.0, (o,e) => ((BrightnessSourceWorker)o).OnLuxChanged((double)e.OldValue, (double)e.NewValue)));
+            DependencyProperty.Register("Lux", typeof(double), typeof(BrightnessSourceWorker), new PropertyMetadata(LuxWorker.INVALID_LUX, (o, e) => ((BrightnessSourceWorker)o).OnLuxChanged((double)e.NewValue)));
 
-        private void OnLuxChanged(double oldValue, double newValue)
+        private void OnLuxChanged(double newValue)
         {
-            if (newValue == LuxWorker.INVALID_LUX)
-            {
-                luxBuffer = null;
-            }
-            else
-            {
-                if (luxBuffer == null)
-                {
-                     luxBuffer = new RollingAverage(5);
-                }
-
-                double MaxLux = Global.Settings.MaxLux;
+            if (newValue != LuxWorker.INVALID_LUX)
+            { 
                 double MinOpacity = Global.Settings.NightBrightness;
-
-                var normalizedLux = Math.Min(1.0, Lux / MaxLux);
-
-                luxBuffer.Update(normalizedLux);
-                var averageLux = luxBuffer.GetAverage();
-
-                var newBrightness = (1.0 - MinOpacity) * averageLux + MinOpacity;
-                Update(newBrightness, Lux);
+                var newBrightness = (1.0 - MinOpacity) * newValue + MinOpacity;
+                Update(newBrightness);
             }
         }
 
@@ -80,10 +59,10 @@ namespace MemoryClock.Workers
             return true;
         }
 
-        private void Update(double newBrightness, double currentLux)
+        private void Update(double newBrightness)
         {
+            //Debug.WriteLine($"Brightness {newBrightness}");
             Brightness = newBrightness;
-            Lux = currentLux;
         }
     }
 }

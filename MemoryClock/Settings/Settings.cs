@@ -1,7 +1,6 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
-using Windows.UI.Xaml;
 
 namespace MemoryClock.Settings
 {

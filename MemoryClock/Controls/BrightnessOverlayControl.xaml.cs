@@ -1,9 +1,7 @@
 ﻿using Common;
 using System;
-using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Hosting;
 
 namespace MemoryClock.Controls
 {

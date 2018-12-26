@@ -2,10 +2,6 @@
 
 using MemoryClock.Sensors;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
 namespace MemoryClock.Workers
@@ -14,6 +10,7 @@ namespace MemoryClock.Workers
     {
         public const double INVALID_LUX = -1.0;
         LuxSensor sensor;
+        private RollingAverage luxBuffer;
 
         public double Lux
         {
@@ -23,7 +20,7 @@ namespace MemoryClock.Workers
 
         public static readonly DependencyProperty LuxProperty =
             DependencyProperty.Register("Lux", typeof(double), typeof(LuxWorker), new PropertyMetadata(INVALID_LUX));
-       
+
         public LuxWorker()
         {
             IsRaspberryPiOnly = true;
@@ -48,12 +45,31 @@ namespace MemoryClock.Workers
 
             try
             {
-                lux = sensor.GetLux();
-                return true;
+                var currentLux = sensor.GetLux();
+                if (currentLux == LuxWorker.INVALID_LUX)
+                {
+                    luxBuffer = null;
+                    return false;
+                }
+                else
+                {
+                    if (luxBuffer == null)
+                    {
+                        luxBuffer = new RollingAverage(5);
+                    }
+
+                    double MaxLux = Global.Settings.MaxLux;
+
+                    var normalizedLux = Math.Min(1.0, currentLux / MaxLux);
+
+                    luxBuffer.Update(normalizedLux);
+                    lux = luxBuffer.GetAverage();
+                    return true;
+                }
             }
             finally
             {
-                System.Diagnostics.Debug.WriteLine($"Lux {lux}");
+                //System.Diagnostics.Debug.WriteLine($"Lux {lux}");
                 Update(lux);
             }
         }
