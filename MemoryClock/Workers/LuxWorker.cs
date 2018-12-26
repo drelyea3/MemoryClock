@@ -30,7 +30,7 @@ namespace MemoryClock.Workers
         {
             base.Setup();
 
-            sensor = LuxSensor.Create(false, LuxSensor.Sensitivity.High);
+            sensor = LuxSensor.Create(true, LuxSensor.Sensitivity.High);
         }
 
         protected override bool DoWork()
