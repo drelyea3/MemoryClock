@@ -54,6 +54,11 @@ namespace MemoryClock.Workers
             }
         }
 
+        public BrightnessSourceWorker()
+        {
+            IsAlwaysEnabled = true;
+        }
+
         protected override bool DoWork()
         {
             return true;
@@ -61,7 +66,7 @@ namespace MemoryClock.Workers
 
         private void Update(double newBrightness)
         {
-            //Debug.WriteLine($"Brightness {newBrightness}");
+            //System.Diagnostics.Debug.WriteLine($"Brightness {newBrightness}");
             Brightness = newBrightness;
         }
     }

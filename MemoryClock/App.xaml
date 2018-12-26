@@ -22,6 +22,7 @@
             Adjustment="{Binding Source={StaticResource NtpSyncSource}, Path=Drift}"/>
         <workers:BrightnessSourceWorker 
             x:Key="BrightnessSource" 
+            Time="{Binding Source={StaticResource TimeSource}, Path=Now}" 
             Lux="{Binding Source={StaticResource LuxSource}, Path=Lux}" 
             Interval="0:0:1"/>
         <workers:GpioWorker 

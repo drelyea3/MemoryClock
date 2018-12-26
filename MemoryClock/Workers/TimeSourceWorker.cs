@@ -56,6 +56,7 @@ namespace MemoryClock.Workers
         public void Update(DateTime now)
         {
             Now = now + Adjustment;
+            //System.Diagnostics.Debug.WriteLine($"System {now} Adjustment {Adjustment} Modified {Now}");
             Tick?.Invoke(this, eventArgs.Set(Now));
         }
     }
