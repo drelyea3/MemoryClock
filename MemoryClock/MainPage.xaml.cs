@@ -76,6 +76,10 @@ namespace MemoryClock
                 IsAccessAllowed = false;
                 UpdateAccess(false);
             }
+            else if (command is QuitApplicationCommand)
+            {
+                App.Current.Exit();
+            }
             else
             {
                 command.Handled = false;

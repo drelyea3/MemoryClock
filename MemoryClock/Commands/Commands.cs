@@ -9,4 +9,5 @@ namespace MemoryClock.Commands
     public class StopTestingCommand : CustomRoutedCommand { }
     public class AccessGrantedCommand : CustomRoutedCommand { }
     public class AccessRevokedCommand : CustomRoutedCommand { }
+    public class QuitApplicationCommand : CustomRoutedCommand { }
 }

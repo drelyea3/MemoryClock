@@ -63,12 +63,13 @@
                 FontSize="24"/>
                 <ComboBox 
                 x:Name="time" 
-                ItemsSource="{StaticResource timeSource}" 
-                ItemTemplate="{StaticResource timeTemplate}" 
-                Foreground="{StaticResource appForegroundBrush}" 
-                VerticalAlignment="Top" 
-                FontSize="24" 
-                SelectionChanged="OnTimeChanged"/>
+                    ItemsSource="{StaticResource timeSource}" 
+                    ItemTemplate="{StaticResource timeTemplate}" 
+                    Foreground="{StaticResource appForegroundBrush}" 
+                    VerticalAlignment="Top" 
+                    FontSize="24" 
+                    SelectionChanged="OnTimeChanged"
+                    />
                 <Grid Margin="0,8,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="14*"/>
